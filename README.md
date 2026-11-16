@@ -51,23 +51,7 @@ Weekly rhythm:
 | Sat | Review and a short writing task (45 min) |
 | Sun | Mini-quiz and mistakes notebook (45 min) |
 
-## Run it locally
 
-No build step and no dependencies. Open `index.html` in a browser, or serve the folder:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then visit `http://localhost:8000`.
-
-## Deploy with GitHub Pages
-
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select your main branch and the `/ (root)` folder, then save.
-5. After a minute the site is live at `https://<your-username>.github.io/german-a1-study-plan/`.
 
 ## Repository structure
 
