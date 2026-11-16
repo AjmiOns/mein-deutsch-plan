@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>German A1 Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm column. Each week is a wide card: topics on the left, its seven dated sessions (each with a timer) on the right.
+   Phases are colored by German noun gender (der blue, die red, das green), the classic learner's coding. */
+:root {
+  --bg: #f6f7fa;
+  --surface: #ffffff;
+  --fg: #151a2c;
+  --muted: #5a6178;
+  --line: #dde1ec;
+  --der: #2457d6;
+  --die: #c8372d;
+  --das: #1f7a4d;
+  --der-soft: #e6edfc;
+  --die-soft: #fbe9e7;
+  --das-soft: #e3f3ea;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1220; --surface: #161b2e; --fg: #e8ebf5; --muted: #99a0b8; --line: #2a3150;
+    --der: #7ea3ff; --die: #ff8a80; --das: #6fd4a1;
+    --der-soft: #1b2748; --die-soft: #3a1f26; --das-soft: #14332a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1220; --surface: #161b2e; --fg: #e8ebf5; --muted: #99a0b8; --line: #2a3150;
+  --der: #7ea3ff; --die: #ff8a80; --das: #6fd4a1;
+  --der-soft: #1b2748; --die-soft: #3a1f26; --das-soft: #14332a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.25rem; font-weight: 500; }
+h4 { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+p { margin: 0; }
+.label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+header { display: flex; flex-direction: column; gap: 18px; }
+.arts { display: flex; gap: 8px; flex-wrap: wrap; }
+.art { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; padding: 3px 10px; border-radius: 4px; }
+.art.der { background: var(--der-soft); color: var(--der); }
+.art.die { background: var(--die-soft); color: var(--die); }
+.art.das { background: var(--das-soft); color: var(--das); }
+.lede { max-width: 62ch; color: var(--muted); font-size: 1.1rem; }
+
+.progress { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+.progress-top { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.progress-top strong { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.bar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--der); transition: width 0.3s ease; }
+.sub { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.reset { font: inherit; font-size: 0.85rem; color: var(--muted); background: none; border: 0; padding: 4px 0; cursor: pointer; text-decoration: underline; }
+.reset:hover { color: var(--fg); }
+
+section { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.section-head { display: flex; flex-direction: column; gap: 6px; }
+.section-head p { color: var(--muted); max-width: 62ch; }
+
+.days { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
+.day { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.day .d { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.day .t { font-weight: 600; font-size: 0.95rem; line-height: 1.35; }
+.day.new { border-top: 3px solid var(--der); }
+.day.talk { border-top: 3px solid var(--die); }
+.day.rest { border-top: 3px solid var(--das); }
+
+.phase { display: flex; flex-direction: column; gap: 16px; }
+.phase-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.phase-head .art { font-size: 0.8rem; }
+.weeks { display: flex; flex-direction: column; gap: 16px; }
+.week { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.week.now { box-shadow: 0 0 0 2px var(--c); }
+.week-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.week-top .label { color: var(--c); }
+.badge { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 999px; background: var(--c); color: var(--surface); }
+.wk-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+@media (min-width: 820px) { .wk-body { grid-template-columns: minmax(200px, 0.8fr) minmax(0, 1.7fr); gap: 28px; } }
+.col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.items, .sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.items { gap: 8px; }
+.items label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; font-size: 0.95rem; line-height: 1.4; }
+input[type=checkbox] { accent-color: var(--c); width: 18px; height: 18px; margin: 1px 0 0; flex: none; }
+input[type=checkbox]:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+input:checked + span { color: var(--muted); }
+.items input:checked + span { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.ses { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.ses:first-child { border-top: 0; padding-top: 0; }
+.ses.running { background: var(--bg); margin-inline: -8px; padding-inline: 8px; border-radius: 6px; border-top-color: transparent; }
+.ses-main { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; flex: 1 1 200px; min-width: 0; }
+.ses-text { display: flex; flex-direction: column; min-width: 0; }
+.ses-day { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ses-day em { font-style: normal; color: var(--c); font-weight: 500; }
+.ses-task { font-size: 0.93rem; line-height: 1.4; overflow-wrap: anywhere; }
+.ses-ctl { display: flex; align-items: center; gap: 6px; flex: none; }
+.clock { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; font-variant-numeric: tabular-nums; min-width: 4.2ch; text-align: right; }
+.ses.finished .clock { color: var(--das); }
+.tb { font: inherit; font-size: 0.8rem; font-weight: 600; min-height: 32px; padding: 2px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.tb:hover { border-color: var(--muted); }
+.tb.go { background: var(--c); border-color: var(--c); color: var(--surface); min-width: 4.8rem; }
+.tb:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+[hidden] { display: none !important; }
+.quiz { border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+.quiz-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
+.quiz-panel { display: flex; flex-direction: column; gap: 12px; background: var(--bg); border-radius: 8px; padding: 16px; min-width: 0; }
+.q-meta { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.q-text { font-size: 1.05rem; font-weight: 500; line-height: 1.4; }
+.q-score { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.q-opts { display: flex; flex-direction: column; gap: 8px; }
+.opt { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; font: inherit; font-size: 0.95rem; line-height: 1.4; padding: 10px 12px; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); cursor: pointer; }
+.opt-k { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); width: 1.4ch; flex: none; text-align: center; }
+.opt-t { min-width: 0; overflow-wrap: anywhere; }
+.opt:hover:not(:disabled) { border-color: var(--muted); }
+.opt:disabled { cursor: default; }
+.opt:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.opt.right { border-color: var(--das); background: var(--das-soft); }
+.opt.right .opt-k { color: var(--das); font-weight: 600; }
+.opt.wrong { border-color: var(--die); background: var(--die-soft); }
+.opt.wrong .opt-k { color: var(--die); font-weight: 600; }
+.q-fb { font-size: 0.93rem; line-height: 1.5; }
+.q-fb strong.ok { color: var(--das); }
+.q-fb strong.bad { color: var(--die); }
+.q-next, .q-again { align-self: flex-start; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; }
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.list li { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.list li:last-child { border-bottom: 0; }
+.list b { font-weight: 600; }
+.list span { color: var(--muted); display: block; font-size: 0.93rem; }
+.exam { background: var(--das-soft); border-radius: 10px; padding: 18px 20px; max-width: 62ch; }
+footer { color: var(--muted); font-size: 0.85rem; }
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="arts" aria-hidden="true"><span class="art der">der</span><span class="art die">die</span><span class="art das">das</span></div>
+    <h1>German A1 in 12 weeks</h1>
+    <p class="lede">One hour a day, five days a week, starting Monday 16 November 2026. Every week has its own seven dated sessions, each with a timer, plus a five-question quiz. Tick off topics and sessions as you go and your progress stays in this browser.</p>
+    <div class="progress">
+      <div class="progress-top">
+        <strong id="count">0% done</strong>
+        <span class="label" id="nowline"></span>
+      </div>
+      <div class="bar" role="progressbar" aria-label="Plan progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div class="fill" id="fill"></div></div>
+      <div class="sub" id="sub"></div>
+      <div><button class="reset" id="reset" type="button">Clear progress</button></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <span class="label">Weekly rhythm</span>
+      <h2>Five study days, two lighter ones</h2>
+      <p>About 5 to 6 hours a week. The same pattern repeats in every week below: 60 minutes on weekdays, 45 on weekends. Write each new noun with its article: der Tisch, not just Tisch.</p>
+    </div>
+    <div class="days">
+      <div class="day new"><span class="d">Mon</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Tue</span><span class="t">Listening, speaking, flashcards</span></div>
+      <div class="day new"><span class="d">Wed</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Thu</span><span class="t">Listening, speaking, flashcards</span></div>
+      <div class="day new"><span class="d">Fri</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day rest"><span class="d">Sat</span><span class="t">Review, short writing task</span></div>
+      <div class="day rest"><span class="d">Sun</span><span class="t">Mini-quiz, mistakes notebook</span></div>
+    </div>
+  </section>
+
+  <div id="phases" style="display:flex;flex-direction:column;gap:48px"></div>
+
+  <section>
+    <div class="two">
+      <div class="phase">
+        <h2>Resources</h2>
+        <ul class="list">
+          <li><b>Course</b><span>Netzwerk neu A1, Menschen A1, or the free Nicos Weg course from Deutsche Welle.</span></li>
+          <li><b>Vocabulary</b><span>Anki or Quizlet, 10 to 15 new words a day.</span></li>
+          <li><b>Listening</b><span>Slow German podcast and DW's Langsam gesprochene Nachrichten.</span></li>
+          <li><b>Speaking</b><span>A language exchange partner on Tandem or HelloTalk, 15 minutes twice a week.</span></li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h2>Habits that help</h2>
+        <ul class="list">
+          <li><b>Say it out loud</b><span>Read your sentences aloud every day, even when you study alone.</span></li>
+          <li><b>Keep a mistakes notebook</b><span>Write each error with its correction and reread it every weekend.</span></li>
+          <li><b>Short and daily</b><span>An hour every day beats a five-hour session once a week.</span></li>
+        </ul>
+        <div class="exam"><b>Booked an exam or visa appointment?</b> Count back from the date and make that week your week 12 mock exam. Shorten or stretch the earlier weeks to fit.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Rough guide: the Goethe-Institut estimates 60 to 150 hours of instruction for A1.</footer>
+</div>
+
+<script>
+(function () {
+  var START = new Date(2026, 10, 16); // Monday 16 Nov 2026
+  var DAY = 86400000;
+  var DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var PHASES = [
+    { cls: "der", name: "Foundations", range: "Weeks 1 to 4", color: "var(--der)", weeks: [
+      ["Sounds and greetings", ["Alphabet and pronunciation", "Greetings", "Introduce yourself: Ich heiße…, Ich komme aus…"]],
+      ["Numbers and time", ["Numbers, days and months", "Telling the time", "The verbs sein and haben"]],
+      ["First sentences", ["Regular verb conjugation", "Basic sentence order", "Yes/no questions and W-questions: Wer, Was, Wo, Wann"]],
+      ["Articles and nouns", ["der, die, das and ein, eine", "Noun gender and plurals", "Review and first mini-test"]]
+    ]},
+    { cls: "die", name: "Everyday situations", range: "Weeks 5 to 8", color: "var(--die)", weeks: [
+      ["People", ["Family", "Jobs", "Describing people"]],
+      ["Food and shopping", ["Food and drinks", "Ordering in a café or restaurant", "Prices and shopping"]],
+      ["Wanting and doing", ["Accusative case", "möchten and können", "Negation with nicht and kein"]],
+      ["Daily routine", ["Your daily routine", "Separable verbs: aufstehen, einkaufen", "Review test"]]
+    ]},
+    { cls: "das", name: "Practical German", range: "Weeks 9 to 12", color: "var(--das)", weeks: [
+      ["Getting around", ["Asking for and giving directions", "Places in the city and transport", "Prepositions in, an, auf"]],
+      ["Home and appointments", ["Housing, rooms and furniture", "Making appointments"]],
+      ["Past and paperwork", ["First look at the Perfekt with haben and sein", "Filling in forms", "Writing short messages"]],
+      ["Mock exam", ["Full mock A1 exam: listening, reading, writing, speaking", "Fix your weak spots"],
+        ["Mock exam: listening and reading", "Mock exam: writing and speaking", "Fix your weak spots"]]
+    ]}
+  ];
+
+  var KEY = "german-a1-plan-v1";
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+  function fmtDate(d) { return d.getDate() + " " + MON[d.getMonth()]; }
+  function fmtClock(sec) {
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  /* Weekly quizzes: [question, correct answer, [wrong answers], explanation]. Options are shuffled when shown. */
+  var QUIZ = {
+    1: [
+      ["Which greeting do you use in the morning?", "Guten Morgen", ["Gute Nacht", "Guten Abend", "Auf Wiedersehen"], "Guten Morgen means good morning. Gute Nacht is only said before going to sleep."],
+      ["How do you say “My name is Anna”?", "Ich heiße Anna.", ["Ich heißt Anna.", "Ich Anna heiße.", "Mein heiße Anna."], "The verb heißen takes the ending -e after ich, and the verb comes second."],
+      ["What does “Ich komme aus Tunesien” mean?", "I come from Tunisia.", ["I am going to Tunisia.", "I live in Tunisia.", "I like Tunisia."], "kommen aus means to come from. It tells people where you are from."],
+      ["How is the letter w pronounced in “Wasser”?", "Like an English v", ["Like an English w", "Like an English f", "Like an English y"], "German w sounds like English v, so Wasser starts with a v sound."],
+      ["Which question is the formal way to ask “How are you?”", "Wie geht es Ihnen?", ["Wie geht’s dir?", "Wer bist du?", "Was machst du?"], "Ihnen is the formal form. Dir is for friends and family."]
+    ],
+    2: [
+      ["Which number is “fünfzehn”?", "15", ["50", "5", "105"], "fünf is 5, fünfzehn is 15 and fünfzig is 50."],
+      ["How do you say 21?", "einundzwanzig", ["zwanzigeins", "zweiundzehn", "zwanzig und ein"], "German says the ones first: ein-und-zwanzig, literally one and twenty."],
+      ["Which day comes after Dienstag?", "Mittwoch", ["Montag", "Donnerstag", "Freitag"], "The week runs Montag, Dienstag, Mittwoch, Donnerstag, Freitag."],
+      ["Complete the sentence: Ich ___ 25 Jahre alt.", "bin", ["habe", "heiße", "komme"], "German uses sein for age: Ich bin 25 Jahre alt. French speakers often want haben, so watch for it."],
+      ["What time is “Es ist halb drei”?", "2:30", ["3:30", "3:00", "2:00"], "halb drei means half before three, so it is 2:30, not 3:30."]
+    ],
+    3: [
+      ["Complete: Du ___ gern Kaffee. (trinken)", "trinkst", ["trinke", "trinkt", "trinken"], "With du, regular verbs end in -st: du trinkst."],
+      ["Which sentence has the correct word order?", "Heute lerne ich Deutsch.", ["Heute ich lerne Deutsch.", "Ich Deutsch lerne heute.", "Lerne heute ich Deutsch."], "In a statement the conjugated verb is always in second position."],
+      ["Which question word asks “where”?", "Wo", ["Wer", "Wann", "Was"], "Wo is where, Wer is who, Wann is when and Was is what."],
+      ["What does “Wer ist das?” ask about?", "A person", ["A place", "A time", "A thing"], "Wer means who, so the question asks about a person."],
+      ["Turn “Sie spricht Deutsch.” into a yes/no question.", "Spricht sie Deutsch?", ["Sie Deutsch spricht?", "Wann spricht sie Deutsch?", "Spricht Deutsch sie?"], "In a yes/no question the verb moves to the first position."]
+    ],
+    4: [
+      ["Which article goes with Tisch (table)?", "der", ["die", "das", "den"], "Tisch is masculine: der Tisch. Learn every noun together with its article."],
+      ["Which article goes with Frau (woman)?", "die", ["der", "das", "den"], "Frau is feminine: die Frau."],
+      ["What is the plural of das Buch?", "die Bücher", ["die Buchs", "die Büchen", "die Buche"], "Buch becomes Bücher, with an umlaut and -er. Plurals have to be learned one by one."],
+      ["Complete: Das ist ___ Lampe.", "eine", ["ein", "einen", "einer"], "Lampe is feminine, so the indefinite article is eine."],
+      ["Which noun is neuter (das)?", "Kind", ["Mann", "Frau", "Hund"], "das Kind is neuter. Mann and Hund are masculine, Frau is feminine."]
+    ],
+    5: [
+      ["What does “die Schwester” mean?", "Sister", ["Brother", "Mother", "Aunt"], "Schwester is sister and Bruder is brother."],
+      ["What is the female form of “der Lehrer”?", "die Lehrerin", ["die Lehrer", "der Lehrerin", "das Lehrerin"], "Add -in for the female form of most jobs: die Lehrerin, die Ärztin."],
+      ["Complete: Das ist ___ Mutter.", "meine", ["mein", "meinen", "meiner"], "Mutter is feminine, so my becomes meine."],
+      ["What does “Er arbeitet als Arzt” mean?", "He works as a doctor.", ["He is visiting a doctor.", "He studies medicine.", "He is a nurse."], "arbeiten als means to work as, and Arzt is doctor."],
+      ["Which word is the opposite of “alt” (old, for a person)?", "jung", ["klein", "groß", "schön"], "alt and jung are opposites. Klein and groß refer to size."]
+    ],
+    6: [
+      ["Which sentence is a polite way to order a coffee?", "Ich möchte einen Kaffee, bitte.", ["Gib mir Kaffee.", "Kaffee.", "Ich will Kaffee jetzt."], "möchte plus bitte is the polite way to order. Kaffee is masculine, so einen."],
+      ["What does “Die Rechnung, bitte” mean?", "The bill, please.", ["The menu, please.", "The water, please.", "The table, please."], "Die Rechnung is the bill. The menu is die Speisekarte."],
+      ["How do you say €4.50 out loud?", "vier Euro fünfzig", ["vierzig Euro fünf", "vier Euro fünf", "vierfünfzig Euro"], "Say the euros first, then the cents: vier Euro fünfzig."],
+      ["What is “das Brot”?", "Bread", ["Butter", "Cheese", "Apple"], "Brot is bread. Butter is die Butter, cheese is der Käse and apple is der Apfel."],
+      ["What does “Was kostet das?” mean?", "How much does this cost?", ["What is this?", "Where is this?", "Who is this?"], "kosten means to cost, so Was kostet das? asks for the price."]
+    ],
+    7: [
+      ["Complete: Ich esse ___ Apfel.", "den", ["der", "dem", "das"], "Apfel is masculine. In the accusative der changes to den."],
+      ["Complete: Ich ___ Deutsch sprechen.", "kann", ["können", "kannst", "könnt"], "With ich the form is kann, and the second verb goes to the end in the infinitive."],
+      ["Complete: Ich habe ___ Auto.", "kein", ["nicht", "keine", "keinen"], "Use kein to negate a noun with an indefinite article. Auto is neuter, so kein."],
+      ["Which sentence is correct?", "Ich möchte keinen Kaffee.", ["Ich möchte kein Kaffee.", "Ich möchte keine Kaffee.", "Ich möchte Kaffee keinen."], "Kaffee is masculine, so kein becomes keinen in the accusative."],
+      ["Which sentence has the correct word order?", "Ich möchte eine Pizza bestellen.", ["Ich möchte bestellen eine Pizza.", "Ich bestellen möchte eine Pizza.", "Ich eine Pizza möchte bestellen."], "With möchten the second verb goes to the end in the infinitive."]
+    ],
+    8: [
+      ["Which sentence is correct?", "Ich stehe um 7 Uhr auf.", ["Ich aufstehe um 7 Uhr.", "Ich auf stehe um 7 Uhr.", "Ich stehen um 7 Uhr auf."], "aufstehen is separable: the prefix auf goes to the end of the sentence."],
+      ["Complete: Er kauft im Supermarkt ___.", "ein", ["an", "aus", "auf"], "einkaufen is separable: Er kauft ein."],
+      ["What does “Ich frühstücke um 8 Uhr” mean?", "I have breakfast at 8 o’clock.", ["I have lunch at 8 o’clock.", "I have dinner at 8 o’clock.", "I wake up at 8 o’clock."], "frühstücken means to have breakfast."],
+      ["What does “am Morgen” mean?", "In the morning", ["In the evening", "At night", "At noon"], "Use am with parts of the day: am Morgen, am Abend."],
+      ["Which verb is separable?", "anrufen", ["besuchen", "verstehen", "bekommen"], "Verbs starting with be- or ver- are inseparable. anrufen splits: Ich rufe dich an."]
+    ],
+    9: [
+      ["What does “Wo ist der Bahnhof?” ask?", "Where is the train station?", ["When does the train leave?", "What does the ticket cost?", "Who is at the station?"], "Wo means where and der Bahnhof is the train station."],
+      ["What does “geradeaus” mean?", "Straight ahead", ["To the left", "To the right", "Back"], "links is left and rechts is right."],
+      ["Complete: Ich fahre ___ Bus.", "mit dem", ["mit den", "mit der", "mit das"], "mit is always followed by the dative. Bus is masculine, so mit dem Bus."],
+      ["Complete: Ich wohne ___ Stadt.", "in der", ["in die", "an der", "auf die"], "To say where you live, use in plus the dative: in der Stadt."],
+      ["Which sentence means “Turn left”?", "Biegen Sie links ab.", ["Biegen Sie rechts ab.", "Gehen Sie geradeaus.", "Fahren Sie zurück."], "links means left. abbiegen is separable: Biegen Sie links ab."]
+    ],
+    10: [
+      ["What is “das Schlafzimmer”?", "The bedroom", ["The kitchen", "The bathroom", "The living room"], "schlafen is to sleep and das Zimmer is the room."],
+      ["What does “die Wohnung” mean?", "Apartment", ["House", "Room", "Garden"], "die Wohnung is an apartment or flat. A house is das Haus."],
+      ["What does “Ich hätte gern einen Termin” mean?", "I would like an appointment.", ["I would like a table.", "I would like a ticket.", "I would like a key."], "ein Termin is an appointment. Ich hätte gern is a polite way to ask for something."],
+      ["What does “Haben Sie am Montag Zeit?” ask?", "Do you have time on Monday?", ["Do you work on Monday?", "Is it Monday today?", "Are you at home on Monday?"], "Zeit haben means to have time, and am Montag means on Monday."],
+      ["Where do you cook?", "In der Küche", ["Im Bad", "Im Schlafzimmer", "Im Flur"], "die Küche is the kitchen. das Bad is the bathroom and der Flur is the hallway."]
+    ],
+    11: [
+      ["Complete: Ich habe Hausaufgaben ___.", "gemacht", ["gemachen", "machen", "gemachte"], "Regular verbs form the participle with ge- and -t: machen becomes gemacht."],
+      ["Complete: Ich ___ gestern nach Tunis gefahren.", "bin", ["habe", "hat", "war"], "Verbs of movement like fahren use sein in the Perfekt."],
+      ["What is the past participle of “lernen”?", "gelernt", ["gelernen", "lernt", "gelernte"], "lernen is regular: ge- plus the stem plus -t."],
+      ["What is “der Nachname” on a form?", "Last name", ["First name", "Address", "Date of birth"], "Nachname is the last name. The first name is der Vorname."],
+      ["Which closing fits a message to a friend?", "Liebe Grüße", ["Hochachtungsvoll", "Sehr geehrte Damen und Herren", "Mit freundlichen Grüßen"], "Liebe Grüße is warm and informal. The others belong in formal letters."]
+    ],
+    12: [
+      ["Complete: Ich ___ aus Tunesien und ___ in Deutschland.", "komme / wohne", ["kommst / wohne", "komme / wohnst", "kommt / wohnen"], "With ich, verbs end in -e: ich komme, ich wohne."],
+      ["How do you say 14:30 informally?", "Es ist halb drei.", ["Es ist halb vier.", "Es ist drei Uhr dreißig.", "Es ist zwei Uhr fünfzehn."], "14:30 is half past two, and halb drei means half before three."],
+      ["Which sentence is correct?", "Gestern bin ich zum Bahnhof gegangen.", ["Gestern habe ich zum Bahnhof gegangen.", "Gestern ich bin zum Bahnhof gegangen.", "Gestern bin ich zum Bahnhof gehen."], "gehen is a movement verb, so the Perfekt uses sein plus gegangen, and the verb stays second."],
+      ["Why is it “Ich habe keinen Bruder”?", "Bruder is masculine and in the accusative.", ["Bruder is feminine.", "Bruder is plural.", "keinen is always used with haben."], "kein changes to keinen for masculine nouns in the accusative."],
+      ["Which sentence fits at the bakery?", "Ich hätte gern zwei Brötchen, bitte.", ["Zwei Brötchen geben.", "Ich will zwei Brötchen jetzt.", "Gib mir Brötchen zwei."], "Ich hätte gern plus bitte is polite and natural when ordering."]
+    ]
+  };
+  var QKEY = "german-a1-plan-quiz-v1";
+  var best = {};
+  try { best = JSON.parse(localStorage.getItem(QKEY) || "{}") || {}; } catch (e) { best = {}; }
+  function saveBest() { try { localStorage.setItem(QKEY, JSON.stringify(best)); } catch (e) {} }
+  function quizCount() { return Object.keys(best).length; }
+  function bestText(wk) {
+    var n = QUIZ[wk].length;
+    return best[wk] != null ? n + " questions · best score " + best[wk] + "/" + n : n + " questions · not taken yet";
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function quizMarkup(wk) {
+    return '<div class="quiz" data-wk="' + wk + '"><div class="quiz-bar"><div class="col"><h4>Week ' + wk + ' quiz</h4><span class="sub quiz-best"></span></div>' +
+      '<button type="button" class="tb go quiz-open">Start quiz</button></div><div class="quiz-panel" hidden></div></div>';
+  }
+  function resetQuizzes() {
+    best = {}; saveBest();
+    Array.prototype.forEach.call(document.querySelectorAll(".quiz"), function (r) {
+      r.querySelector(".quiz-best").textContent = bestText(r.getAttribute("data-wk"));
+    });
+  }
+  function initQuiz(card, wk) {
+    var root = card.querySelector(".quiz");
+    var panel = root.querySelector(".quiz-panel");
+    var openBtn = root.querySelector(".quiz-open");
+    var bestEl = root.querySelector(".quiz-best");
+    bestEl.textContent = bestText(wk);
+    var qs = [], idx = 0, score = 0;
+
+    function show() {
+      panel.textContent = "";
+      var item = qs[idx];
+      var opts = shuffle([item[1]].concat(item[2]));
+      panel.appendChild(el("div", "q-meta", "Question " + (idx + 1) + " of " + qs.length));
+      panel.appendChild(el("p", "q-text", item[0]));
+      var list = el("div", "q-opts");
+      var fb = el("div", "q-fb");
+      fb.setAttribute("aria-live", "polite");
+      var next = el("button", "tb go q-next", idx + 1 < qs.length ? "Next question" : "See score");
+      next.type = "button";
+      next.hidden = true;
+      opts.forEach(function (o, i) {
+        var b = el("button", "opt");
+        b.type = "button";
+        b.appendChild(el("span", "opt-k", "ABCD".charAt(i)));
+        b.appendChild(el("span", "opt-t", o));
+        b.addEventListener("click", function () {
+          var ok = o === item[1];
+          if (ok) score++;
+          Array.prototype.forEach.call(list.children, function (c) {
+            c.disabled = true;
+            var t = c.lastChild.textContent;
+            if (t === item[1]) { c.classList.add("right"); c.firstChild.textContent = "✓"; }
+            else if (c === b) { c.classList.add("wrong"); c.firstChild.textContent = "✗"; }
+          });
+          fb.textContent = "";
+          fb.appendChild(el("strong", ok ? "ok" : "bad", ok ? "Correct. " : "Not quite. "));
+          fb.appendChild(document.createTextNode(item[3]));
+          next.hidden = false;
+          next.focus();
+        });
+        list.appendChild(b);
+      });
+      next.addEventListener("click", function () {
+        idx++;
+        if (idx < qs.length) show(); else finish();
+      });
+      panel.appendChild(list);
+      panel.appendChild(fb);
+      panel.appendChild(next);
+    }
+
+    function finish() {
+      var n = qs.length;
+      if (best[wk] == null || score > best[wk]) { best[wk] = score; saveBest(); }
+      bestEl.textContent = bestText(wk);
+      panel.textContent = "";
+      panel.appendChild(el("div", "q-meta", "Result"));
+      panel.appendChild(el("p", "q-score", score + " of " + n + " correct"));
+      panel.appendChild(el("p", "q-text", score === n ? "Perfect. You are ready for the next week." : (score >= n - 1 ? "Well done. Skim the topics you missed, then move on." : "Revisit this week’s topics and try again.")));
+      var again = el("button", "tb go q-again", "Try again");
+      again.type = "button";
+      again.addEventListener("click", start);
+      panel.appendChild(again);
+      update();
+    }
+
+    function start() {
+      qs = shuffle(QUIZ[wk]); idx = 0; score = 0;
+      panel.hidden = false;
+      show();
+    }
+
+    openBtn.addEventListener("click", function () {
+      if (panel.hidden) { start(); openBtn.textContent = "Close quiz"; }
+      else { panel.hidden = true; panel.textContent = ""; openBtn.textContent = "Start quiz"; }
+    });
+  }
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var current = Math.floor((today - START) / (7 * DAY)) + 1;
+
+  function sessionTasks(topics, lessons) {
+    var l = lessons || [
+      "Lesson: " + topics[0],
+      "Lesson: " + topics[1],
+      topics[2] ? "Lesson: " + topics[2] : "Review and practise this week's topics"
+    ];
+    return [l[0], "Listening practice + flashcards", l[1], "Speaking practice + flashcards", l[2], "Review + short writing task", "Mini-quiz + mistakes notebook"];
+  }
+
+  var host = document.getElementById("phases");
+  var n = 0;
+  PHASES.forEach(function (p) {
+    var sec = document.createElement("section");
+    sec.className = "phase";
+    sec.innerHTML = '<div class="phase-head"><span class="art ' + p.cls + '">' + p.cls + '</span><h2>' + p.name + '</h2><span class="label">' + p.range + '</span></div>';
+    var list = document.createElement("div");
+    list.className = "weeks";
+    p.weeks.forEach(function (w) {
+      n += 1;
+      var wk = n;
+      var s = new Date(START.getTime() + (wk - 1) * 7 * DAY);
+      var e = new Date(s.getTime() + 6 * DAY);
+      var card = document.createElement("div");
+      card.className = "week" + (wk === current ? " now" : "");
+      card.style.setProperty("--c", p.color);
+
+      var html = '<div class="week-top"><span class="label">Week ' + wk + " · " + fmtDate(s) + " to " + fmtDate(e) + "</span>" +
+        (wk === current ? '<span class="badge">This week</span>' : "") + "</div><h3>" + w[0] + "</h3>";
+      html += '<div class="wk-body"><div class="col"><h4>Topics</h4><ul class="items">';
+      w[1].forEach(function (item, i) {
+        var id = "w" + wk + "-" + i;
+        html += '<li><label><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + "><span>" + item + "</span></label></li>";
+      });
+      html += '</ul></div><div class="col"><h4>Sessions</h4><ul class="sessions">';
+      var tasks = sessionTasks(w[1], w[2]);
+      tasks.forEach(function (task, i) {
+        var d = new Date(s.getTime() + i * DAY);
+        var mins = i < 5 ? 60 : 45;
+        var id = "s" + wk + "-" + i;
+        var isToday = d.getTime() === today.getTime();
+        html += '<li class="ses' + (done[id] ? " finished" : "") + '" data-min="' + mins + '" data-k="' + id + '">' +
+          '<label class="ses-main"><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + '><span class="ses-text">' +
+          '<span class="ses-day">' + DOW[i] + " " + fmtDate(d) + " · " + mins + " min" + (isToday ? " · <em>Today</em>" : "") + "</span>" +
+          '<span class="ses-task">' + task + "</span></span></label>" +
+          '<div class="ses-ctl"><span class="clock" role="timer">' + fmtClock(mins * 60) + '</span>' +
+          '<button type="button" class="tb go">Start</button><button type="button" class="tb rs">Reset</button></div></li>';
+      });
+      html += "</ul></div></div>" + quizMarkup(wk);
+      card.innerHTML = html;
+      initQuiz(card, wk);
+      list.appendChild(card);
+    });
+    sec.appendChild(list);
+    host.appendChild(sec);
+  });
+
+  /* Progress */
+  var count = document.getElementById("count");
+  var fill = document.getElementById("fill");
+  var bar = document.getElementById("bar");
+  var sub = document.getElementById("sub");
+  function update() {
+    var boxes = host.querySelectorAll("input[type=checkbox]");
+    var tot = 0, dn = 0, sT = 0, sD = 0, tT = 0, tD = 0;
+    Array.prototype.forEach.call(boxes, function (b) {
+      var isS = b.getAttribute("data-k").charAt(0) === "s";
+      tot++; if (b.checked) dn++;
+      if (isS) { sT++; if (b.checked) sD++; } else { tT++; if (b.checked) tD++; }
+    });
+    var pct = Math.round((dn / tot) * 100);
+    count.textContent = pct + "% done";
+    fill.style.width = pct + "%";
+    bar.setAttribute("aria-valuenow", pct);
+    sub.textContent = sD + " of " + sT + " sessions · " + tD + " of " + tT + " topics · " + quizCount() + " of 12 quizzes taken";
+  }
+  function setDone(k, val) {
+    if (val) done[k] = 1; else delete done[k];
+    Array.prototype.forEach.call(host.querySelectorAll('input[data-k="' + k + '"]'), function (i) { i.checked = !!val; });
+    var row = host.querySelector('.ses[data-k="' + k + '"]');
+    if (row) row.classList.toggle("finished", !!val);
+    save(); update();
+  }
+  host.addEventListener("change", function (ev) {
+    var k = ev.target && ev.target.getAttribute && ev.target.getAttribute("data-k");
+    if (k) setDone(k, ev.target.checked);
+  });
+
+  /* Session timers */
+  var audio = null;
+  function beep() {
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.35, 0.7].forEach(function (t) {
+        var o = audio.createOscillator(), g = audio.createGain();
+        o.frequency.value = 880; o.connect(g); g.connect(audio.destination);
+        var st = audio.currentTime + t;
+        g.gain.setValueAtTime(0.0001, st);
+        g.gain.exponentialRampToValueAtTime(0.25, st + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, st + 0.25);
+        o.start(st); o.stop(st + 0.3);
+      });
+    } catch (e) {}
+  }
+  var timers = [];
+  Array.prototype.forEach.call(host.querySelectorAll(".ses"), function (row) {
+    var t = { row: row, key: row.getAttribute("data-k"), total: parseInt(row.getAttribute("data-min"), 10) * 60, left: 0, end: 0, running: false };
+    t.left = t.total;
+    t.clock = row.querySelector(".clock");
+    t.go = row.querySelector(".go");
+    t.rs = row.querySelector(".rs");
+    var label = row.querySelector(".ses-day").textContent.split(" · ")[0];
+    t.render = function () {
+      t.clock.textContent = t.left <= 0 ? "Done" : fmtClock(t.left);
+      t.go.textContent = t.running ? "Pause" : (t.left <= 0 ? "Restart" : (t.left < t.total ? "Resume" : "Start"));
+      t.go.setAttribute("aria-label", t.go.textContent + " timer for " + label);
+      t.rs.setAttribute("aria-label", "Reset timer for " + label);
+      row.classList.toggle("running", t.running);
+    };
+    t.pause = function () {
+      if (t.running) { t.left = Math.max(0, Math.ceil((t.end - Date.now()) / 1000)); t.running = false; }
+      t.render();
+    };
+    t.go.addEventListener("click", function () {
+      if (t.running) { t.pause(); return; }
+      timers.forEach(function (o) { if (o !== t) o.pause(); });
+      if (t.left <= 0) t.left = t.total;
+      t.end = Date.now() + t.left * 1000;
+      t.running = true;
+      try { audio = audio || new (window.AudioContext || window.webkitAudioContext)(); if (audio.resume) audio.resume(); } catch (e) {}
+      t.render();
+    });
+    t.rs.addEventListener("click", function () { t.running = false; t.left = t.total; t.render(); });
+    t.render();
+    timers.push(t);
+  });
+  setInterval(function () {
+    timers.forEach(function (t) {
+      if (!t.running) return;
+      var left = Math.ceil((t.end - Date.now()) / 1000);
+      if (left <= 0) { t.running = false; t.left = 0; t.render(); setDone(t.key, true); beep(); return; }
+      if (left !== t.left) { t.left = left; t.render(); }
+    });
+  }, 250);
+
+  document.getElementById("reset").addEventListener("click", function () {
+    done = {};
+    resetQuizzes();
+    Array.prototype.forEach.call(host.querySelectorAll("input[type=checkbox]"), function (i) { i.checked = false; });
+    Array.prototype.forEach.call(host.querySelectorAll(".ses"), function (r) { r.classList.remove("finished"); });
+    timers.forEach(function (t) { t.running = false; t.left = t.total; t.render(); });
+    save(); update();
+  });
+
+  var line = document.getElementById("nowline");
+  if (current < 1) line.textContent = "Starts " + fmtDate(START);
+  else if (current > 12) line.textContent = "12-week plan finished";
+  else line.textContent = "Week " + current + " of 12";
+  update();
+})();
+</script>
+</body>
+</html>
