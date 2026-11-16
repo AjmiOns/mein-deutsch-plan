@@ -4,137 +4,247 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>German A1 Plan</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one calm column. Each week is a wide card: topics on the left, its seven dated sessions (each with a timer) on the right.
-   Phases are colored by German noun gender (der blue, die red, das green), the classic learner's coding. */
+/* Layout: a soft pastel hero that follows the light or dark theme, with a live "today" focus timer; stat tiles overlap its lower edge;
+   below, a week navigator opens one week panel at a time. German gender colors (der blue, die rose, das mint) tag the three phases;
+   a warm pastel gold is reserved for the primary action and the streak. */
 :root {
-  --bg: #f6f7fa;
+  --bg: #f7f6fc;
   --surface: #ffffff;
-  --fg: #151a2c;
-  --muted: #5a6178;
-  --line: #dde1ec;
-  --der: #2457d6;
-  --die: #c8372d;
-  --das: #1f7a4d;
-  --der-soft: #e6edfc;
-  --die-soft: #fbe9e7;
-  --das-soft: #e3f3ea;
+  --surface-2: #f0eefa;
+  --fg: #2a2a45;
+  --muted: #66658a;
+  --line: #e3e0f1;
+  --der: #4f74c9;
+  --die: #b9525e;
+  --das: #357d64;
+  --gold: #946a14;
+  --der-soft: #e5ecfb;
+  --die-soft: #fbe7ea;
+  --das-soft: #ddf1e8;
+  --gold-btn: #f4d28a;
+  --on-gold: #3a2c08;
+  --on-c: #ffffff;
+  --hero-bg: linear-gradient(135deg, #e9effd 0%, #f6eaf5 52%, #e5f5ee 100%);
+  --glow-der: rgba(95, 130, 215, 0.14);
+  --glow-die: rgba(226, 132, 146, 0.14);
+  --glow-das: rgba(100, 190, 150, 0.14);
+  --shadow: 0 1px 2px rgba(60, 55, 110, 0.05), 0 10px 28px rgba(60, 55, 110, 0.08);
+  --shadow-lg: 0 2px 4px rgba(60, 55, 110, 0.05), 0 24px 56px rgba(60, 55, 110, 0.13);
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1220; --surface: #161b2e; --fg: #e8ebf5; --muted: #99a0b8; --line: #2a3150;
-    --der: #7ea3ff; --die: #ff8a80; --das: #6fd4a1;
-    --der-soft: #1b2748; --die-soft: #3a1f26; --das-soft: #14332a;
+    --bg: #14152a; --surface: #1d1f3a; --surface-2: #25284a; --fg: #ebebf7; --muted: #a2a3c4; --line: #33365c;
+    --der: #9db7f3; --die: #f2a9b2; --das: #92d5b8; --gold: #f0cd86;
+    --der-soft: #26325a; --die-soft: #3f2a3e; --das-soft: #20403a;
+    --gold-btn: #f0cd86; --on-gold: #2b2108; --on-c: #15162b;
+    --hero-bg: linear-gradient(135deg, #1b1e3f 0%, #251f40 52%, #17303a 100%);
+    --glow-der: rgba(157, 183, 243, 0.14); --glow-die: rgba(242, 169, 178, 0.1); --glow-das: rgba(146, 213, 184, 0.1);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.35), 0 24px 56px rgba(0, 0, 0, 0.4);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e1220; --surface: #161b2e; --fg: #e8ebf5; --muted: #99a0b8; --line: #2a3150;
-  --der: #7ea3ff; --die: #ff8a80; --das: #6fd4a1;
-  --der-soft: #1b2748; --die-soft: #3a1f26; --das-soft: #14332a;
+  --bg: #14152a; --surface: #1d1f3a; --surface-2: #25284a; --fg: #ebebf7; --muted: #a2a3c4; --line: #33365c;
+  --der: #9db7f3; --die: #f2a9b2; --das: #92d5b8; --gold: #f0cd86;
+  --der-soft: #26325a; --die-soft: #3f2a3e; --das-soft: #20403a;
+  --gold-btn: #f0cd86; --on-gold: #2b2108; --on-c: #15162b;
+  --hero-bg: linear-gradient(135deg, #1b1e3f 0%, #251f40 52%, #17303a 100%);
+  --glow-der: rgba(157, 183, 243, 0.14); --glow-die: rgba(242, 169, 178, 0.1); --glow-das: rgba(146, 213, 184, 0.1);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.35), 0 24px 56px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { margin: 0; }
-body {
-  background: var(--bg); color: var(--fg);
-  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
-  padding-block: 32px 64px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
-h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; }
-h3 { font-size: 1.25rem; font-weight: 500; }
+html { scroll-behavior: auto; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 60; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
 h4 { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 p { margin: 0; }
+button { font: inherit; }
+.in { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-
-header { display: flex; flex-direction: column; gap: 18px; }
-.arts { display: flex; gap: 8px; flex-wrap: wrap; }
-.art { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; padding: 3px 10px; border-radius: 4px; }
-.art.der { background: var(--der-soft); color: var(--der); }
-.art.die { background: var(--die-soft); color: var(--die); }
-.art.das { background: var(--das-soft); color: var(--das); }
-.lede { max-width: 62ch; color: var(--muted); font-size: 1.1rem; }
-
-.progress { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
-.progress-top { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
-.progress-top strong { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.bar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
-.fill { height: 100%; width: 0; background: var(--der); transition: width 0.3s ease; }
 .sub { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.reset { font: inherit; font-size: 0.85rem; color: var(--muted); background: none; border: 0; padding: 4px 0; cursor: pointer; text-decoration: underline; }
+.col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* Navigation */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--fg); border-bottom: 1px solid var(--line); }
+.nav::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; opacity: 0.8; background: linear-gradient(90deg, var(--der) 0 33.33%, var(--die) 33.33% 66.66%, var(--das) 66.66%); }
+.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 62px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--fg); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; flex: none; }
+.dots { display: flex; gap: 3px; }
+.dots i { width: 8px; height: 22px; border-radius: 2px; display: block; }
+.dots i:nth-child(1) { background: var(--der); }
+.dots i:nth-child(2) { background: var(--die); }
+.dots i:nth-child(3) { background: var(--das); }
+.links { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.links::-webkit-scrollbar { display: none; }
+.links a { color: var(--muted); text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 0.92rem; font-weight: 500; white-space: nowrap; }
+.links a:hover { color: var(--fg); }
+.links a[aria-current="true"] { color: var(--fg); background: var(--surface-2); }
+.icon-btn { flex: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.icon-btn:hover { border-color: var(--muted); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--der); outline-offset: 2px; }
+@media (max-width: 560px) { .brand-t { display: none; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; background: var(--hero-bg); color: var(--fg); padding-block: 56px 132px; }
+.hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(520px 300px at 8% 0%, var(--glow-der), transparent 70%), radial-gradient(460px 280px at 96% 14%, var(--glow-die), transparent 70%), radial-gradient(520px 320px at 55% 112%, var(--glow-das), transparent 70%); }
+.hero-in { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (min-width: 940px) { .hero-in { grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr); gap: 56px; } }
+.eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-size: clamp(3.4rem, 12vw, 7.4rem); font-weight: 800; letter-spacing: -0.045em; line-height: 0.92; margin: 14px 0 22px; }
+.a1 { position: relative; display: inline-block; }
+.a1::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.04em; height: 0.09em; border-radius: 2px;
+  background: linear-gradient(90deg, var(--der) 0 33.33%, var(--die) 33.33% 66.66%, var(--das) 66.66%); }
+.lede { max-width: 54ch; color: var(--muted); font-size: 1.12rem; }
+.arts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.art { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; padding: 5px 14px; border-radius: 6px; border: 1px solid; }
+.art.der { color: var(--der); border-color: var(--der); background: var(--der-soft); }
+.art.die { color: var(--die); border-color: var(--die); background: var(--die-soft); }
+.art.das { color: var(--das); border-color: var(--das); background: var(--das-soft); }
+.facts { display: flex; gap: 8px 22px; flex-wrap: wrap; margin: 26px 0 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 500; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes slide { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+.hero .eyebrow, .hero h1, .hero .lede, .hero .facts { animation: rise 0.6s ease both; }
+.hero h1 { animation-delay: 0.05s; }
+.hero .lede { animation-delay: 0.12s; }
+.hero .art { animation: slide 0.5s ease both; }
+.hero .art:nth-child(1) { animation-delay: 0.2s; }
+.hero .art:nth-child(2) { animation-delay: 0.32s; }
+.hero .art:nth-child(3) { animation-delay: 0.44s; }
+.hero .facts { animation-delay: 0.5s; }
+
+/* Focus timer */
+.focus { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow-lg); animation: rise 0.7s ease 0.2s both; min-width: 0; }
+.focus-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pill { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.focus.running .pill { color: var(--on-gold); background: var(--gold-btn); border-color: var(--gold-btn); }
+.focus.done .pill { color: var(--das); background: var(--das-soft); border-color: var(--das); }
+.ring-wrap { position: relative; width: min(100%, 220px); margin: 4px auto; }
+.ring { display: block; width: 100%; height: auto; }
+.ring-bg { fill: none; stroke: var(--line); stroke-width: 7; }
+.ring-fg { fill: none; stroke: var(--der); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 339.292; stroke-dashoffset: 339.292; transition: stroke-dashoffset 0.4s linear, stroke 0.3s; }
+.focus.running .ring-fg { stroke: var(--gold); }
+.focus.done .ring-fg { stroke: var(--das); }
+.ring-mid { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.focus-clock { font-family: var(--font-mono); font-size: clamp(2rem, 8vw, 2.7rem); font-weight: 500; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.focus-min { font-size: 0.8rem; color: var(--muted); }
+.focus-task { font-size: 1.35rem; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
+.focus-meta { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: -6px; }
+.focus-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.btn { font-weight: 600; font-size: 0.9rem; min-height: 42px; padding: 6px 18px; border-radius: 10px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--gold-btn); border-color: var(--gold-btn); color: var(--on-gold); min-width: 120px; }
+.btn.primary:hover { filter: brightness(1.06); }
+
+/* Main + stat tiles */
+.main { display: flex; flex-direction: column; gap: 72px; padding-bottom: 72px; }
+.stats { position: relative; z-index: 2; margin-top: -72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 14px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tile .v { font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.tile .v small { font-size: 1.1rem; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+.tile.streak .v { color: var(--gold); }
+.bar { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; margin-top: 4px; }
+.fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--der) 0 33.33%, var(--die) 33.33% 66.66%, var(--das) 66.66%); background-size: 100vw 100%; transition: width 0.4s ease; }
+.reset { font-size: 0.85rem; color: var(--muted); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-align: left; }
 .reset:hover { color: var(--fg); }
 
-section { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-.section-head { display: flex; flex-direction: column; gap: 6px; }
-.section-head p { color: var(--muted); max-width: 62ch; }
+/* Section heads */
+.sec { display: flex; flex-direction: column; gap: 28px; min-width: 0; scroll-margin-top: 80px; }
+.sec-head { display: flex; flex-direction: column; gap: 8px; }
+.sec-head h2 { font-size: clamp(1.9rem, 5vw, 2.7rem); font-weight: 800; letter-spacing: -0.03em; }
+.sec-head p { color: var(--muted); max-width: 62ch; }
 
-.days { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
-.day { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+/* Weekly rhythm */
+.rhythm { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; }
+.day { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .day .d { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
-.day .t { font-weight: 600; font-size: 0.95rem; line-height: 1.35; }
+.day .t { font-weight: 600; font-size: 0.92rem; line-height: 1.35; }
 .day.new { border-top: 3px solid var(--der); }
 .day.talk { border-top: 3px solid var(--die); }
 .day.rest { border-top: 3px solid var(--das); }
 
-.phase { display: flex; flex-direction: column; gap: 16px; }
-.phase-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.phase-head .art { font-size: 0.8rem; }
-.weeks { display: flex; flex-direction: column; gap: 16px; }
-.week { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.week.now { box-shadow: 0 0 0 2px var(--c); }
-.week-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
-.week-top .label { color: var(--c); }
-.badge { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 999px; background: var(--c); color: var(--surface); }
-.wk-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-@media (min-width: 820px) { .wk-body { grid-template-columns: minmax(200px, 0.8fr) minmax(0, 1.7fr); gap: 28px; } }
-.col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+/* Week navigator */
+.chips { display: flex; flex-wrap: wrap; gap: 20px 32px; }
+.cgroup { display: flex; flex-direction: column; gap: 8px; }
+.cgroup-l { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); font-weight: 500; }
+.cgrow { display: flex; gap: 8px; }
+.chip { position: relative; width: 46px; height: 46px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--fg); font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; cursor: pointer; font-variant-numeric: tabular-nums; transition: transform 0.15s ease, border-color 0.15s; }
+.chip:hover { border-color: var(--c); transform: translateY(-2px); }
+.chip.complete { background: var(--cs); border-color: var(--c); }
+.chip.complete::before { content: "✓"; position: absolute; right: 4px; bottom: 0; font-size: 0.62rem; color: var(--c); }
+.chip.now::after { content: ""; position: absolute; top: -5px; right: -5px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
+.chip[aria-current="true"] { background: var(--c); border-color: var(--c); color: var(--on-c); }
+.chip[aria-current="true"].complete::before { color: var(--on-c); }
+
+/* Week panel */
+.wp { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+.wp-head { background: var(--cs); color: var(--fg); border-bottom: 3px solid var(--c); padding: 22px 24px; display: flex; align-items: center; gap: 12px 22px; flex-wrap: wrap; }
+.wp-num { font-family: var(--font-display); font-weight: 800; font-size: clamp(3.2rem, 9vw, 5.2rem); line-height: 0.9; letter-spacing: -0.05em; color: var(--c); font-variant-numeric: tabular-nums; }
+.wp-title { flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.wp-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.wp-title h3 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+.badge { font-style: normal; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 999px; background: var(--c); color: var(--on-c); margin-left: 6px; }
+.wp-side { display: flex; align-items: center; gap: 14px; }
+.mini { position: relative; width: 56px; height: 56px; color: var(--c); }
+.mini svg { display: block; width: 100%; height: 100%; }
+.m-bg { fill: none; stroke: currentColor; stroke-opacity: 0.28; stroke-width: 4; }
+.m-fg { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 125.664; stroke-dashoffset: 125.664; transition: stroke-dashoffset 0.4s ease; }
+.m-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--fg); }
+.wp-nav { display: flex; gap: 8px; }
+.arrow { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid currentColor; background: transparent; color: var(--c); cursor: pointer; font-size: 1.3rem; line-height: 1; }
+.arrow:hover:not(:disabled) { background: var(--c); color: var(--on-c); }
+.arrow:disabled { opacity: 0.35; cursor: default; }
+.wp-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px; }
+@media (min-width: 820px) { .wp-body { grid-template-columns: minmax(200px, 0.8fr) minmax(0, 1.7fr); gap: 32px; } }
 .items, .sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.items { gap: 8px; }
+.items { gap: 10px; }
 .items label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; font-size: 0.95rem; line-height: 1.4; }
 input[type=checkbox] { accent-color: var(--c); width: 18px; height: 18px; margin: 1px 0 0; flex: none; }
-input[type=checkbox]:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 input:checked + span { color: var(--muted); }
 .items input:checked + span { text-decoration: line-through; text-decoration-thickness: 1px; }
 
-.ses { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.ses { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
 .ses:first-child { border-top: 0; padding-top: 0; }
-.ses.running { background: var(--bg); margin-inline: -8px; padding-inline: 8px; border-radius: 6px; border-top-color: transparent; }
+.ses.istoday { background: color-mix(in srgb, var(--c) 9%, var(--surface)); margin-inline: -10px; padding-inline: 10px; border-radius: 8px; border-top-color: transparent; }
+.ses.running { background: color-mix(in srgb, var(--c) 16%, var(--surface)); margin-inline: -10px; padding-inline: 10px; border-radius: 8px; border-top-color: transparent; }
+.ses.flash { animation: flash 1.5s ease; }
+@keyframes flash { 0%, 60% { box-shadow: 0 0 0 3px var(--c); } 100% { box-shadow: 0 0 0 3px transparent; } }
 .ses-main { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; flex: 1 1 200px; min-width: 0; }
 .ses-text { display: flex; flex-direction: column; min-width: 0; }
 .ses-day { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.ses-day em { font-style: normal; color: var(--c); font-weight: 500; }
-.ses-task { font-size: 0.93rem; line-height: 1.4; overflow-wrap: anywhere; }
+.ses-day em { font-style: normal; color: var(--c); font-weight: 600; }
+.ses-task { font-size: 0.95rem; line-height: 1.4; overflow-wrap: anywhere; }
 .ses-ctl { display: flex; align-items: center; gap: 6px; flex: none; }
 .clock { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; font-variant-numeric: tabular-nums; min-width: 4.2ch; text-align: right; }
 .ses.finished .clock { color: var(--das); }
-.tb { font: inherit; font-size: 0.8rem; font-weight: 600; min-height: 32px; padding: 2px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.tb { font-size: 0.8rem; font-weight: 600; min-height: 34px; padding: 2px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
 .tb:hover { border-color: var(--muted); }
-.tb.go { background: var(--c); border-color: var(--c); color: var(--surface); min-width: 4.8rem; }
-.tb:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.tb.go { background: var(--c); border-color: var(--c); color: var(--on-c); min-width: 4.8rem; }
 
-[hidden] { display: none !important; }
-.quiz { border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+/* Quiz */
+.quiz { border-top: 1px solid var(--line); background: var(--surface-2); padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
 .quiz-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
-.quiz-panel { display: flex; flex-direction: column; gap: 12px; background: var(--bg); border-radius: 8px; padding: 16px; min-width: 0; }
+.quiz-panel { display: flex; flex-direction: column; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; min-width: 0; }
 .q-meta { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.q-text { font-size: 1.05rem; font-weight: 500; line-height: 1.4; }
-.q-score { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.q-text { font-size: 1.08rem; font-weight: 500; line-height: 1.4; }
+.q-score { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .q-opts { display: flex; flex-direction: column; gap: 8px; }
-.opt { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; font: inherit; font-size: 0.95rem; line-height: 1.4; padding: 10px 12px; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); cursor: pointer; }
+.opt { display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left; font-size: 0.95rem; line-height: 1.4; padding: 10px 12px; min-height: 46px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--fg); cursor: pointer; }
 .opt-k { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); width: 1.4ch; flex: none; text-align: center; }
 .opt-t { min-width: 0; overflow-wrap: anywhere; }
 .opt:hover:not(:disabled) { border-color: var(--muted); }
 .opt:disabled { cursor: default; }
-.opt:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 .opt.right { border-color: var(--das); background: var(--das-soft); }
 .opt.right .opt-k { color: var(--das); font-weight: 600; }
 .opt.wrong { border-color: var(--die); background: var(--die-soft); }
@@ -143,100 +253,211 @@ input:checked + span { color: var(--muted); }
 .q-fb strong.ok { color: var(--das); }
 .q-fb strong.bad { color: var(--die); }
 .q-next, .q-again { align-self: flex-start; }
-.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; }
+.gold { color: var(--gold); }
+
+/* Article trainer */
+.trainer { --c: var(--der); background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 24px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+@media (min-width: 820px) { .trainer { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 36px; align-items: center; } }
+.t-card { background: var(--surface-2); border-radius: 14px; padding: 28px 22px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; min-width: 0; }
+.t-line { display: flex; gap: 14px; align-items: baseline; justify-content: center; flex-wrap: wrap; }
+.t-art { font-family: var(--font-mono); font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 500; min-width: 3.2ch; color: var(--muted); }
+.t-art.der { color: var(--der); } .t-art.die { color: var(--die); } .t-art.das { color: var(--das); }
+.t-word { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.2rem, 8vw, 3.4rem); letter-spacing: -0.03em; overflow-wrap: anywhere; }
+.t-mean { color: var(--muted); }
+.t-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.t-stats { display: flex; gap: 6px 20px; flex-wrap: wrap; font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.t-stats b { color: var(--fg); font-weight: 600; }
+.gbtns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.gbtn { font-family: var(--font-mono); font-size: 1.15rem; font-weight: 500; min-height: 56px; border-radius: 12px; border: 2px solid var(--gc); background: var(--gs); color: var(--gc); cursor: pointer; transition: transform 0.12s ease; }
+.gbtn:hover:not(:disabled) { transform: translateY(-2px); }
+.gbtn:disabled { cursor: default; }
+.gbtn.der { --gc: var(--der); --gs: var(--der-soft); }
+.gbtn.die { --gc: var(--die); --gs: var(--die-soft); }
+.gbtn.das { --gc: var(--das); --gs: var(--das-soft); }
+.gbtn.dim { opacity: 0.4; }
+.gbtn.right { background: var(--gc); color: var(--on-c); }
+.t-fb { min-height: 3.2em; font-size: 0.95rem; line-height: 1.5; }
+.t-fb strong.ok { color: var(--das); }
+.t-fb strong.bad { color: var(--die); }
+
+/* Resources */
+.res { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 14px; }
+.rcard { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.rcard h3 { font-size: 1.1rem; font-weight: 700; color: var(--c); }
+.rcard p { color: var(--muted); font-size: 0.93rem; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 28px; align-items: start; }
 .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .list li { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
 .list li:last-child { border-bottom: 0; }
 .list b { font-weight: 600; }
 .list span { color: var(--muted); display: block; font-size: 0.93rem; }
-.exam { background: var(--das-soft); border-radius: 10px; padding: 18px 20px; max-width: 62ch; }
-footer { color: var(--muted); font-size: 0.85rem; }
-@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+.exam { background: var(--das-soft); border-radius: 14px; padding: 20px 22px; }
+
+footer { background: var(--surface-2); border-top: 1px solid var(--line); color: var(--muted); padding-block: 28px; font-size: 0.85rem; }
+footer .in { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header>
-    <div class="arts" aria-hidden="true"><span class="art der">der</span><span class="art die">die</span><span class="art das">das</span></div>
-    <h1>German A1 in 12 weeks</h1>
-    <p class="lede">One hour a day, five days a week, starting Monday 16 November 2026. Every week has its own seven dated sessions, each with a timer, plus a five-question quiz. Tick off topics and sessions as you go and your progress stays in this browser.</p>
-    <div class="progress">
-      <div class="progress-top">
-        <strong id="count">0% done</strong>
-        <span class="label" id="nowline"></span>
-      </div>
-      <div class="bar" role="progressbar" aria-label="Plan progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div class="fill" id="fill"></div></div>
-      <div class="sub" id="sub"></div>
-      <div><button class="reset" id="reset" type="button">Clear progress</button></div>
+<nav class="nav" aria-label="Main">
+  <div class="in nav-in">
+    <a class="brand" href="#top" data-scroll="top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-t">Deutsch A1</span></a>
+    <div class="links">
+      <a href="#today" data-scroll="today">Today</a>
+      <a href="#plan" data-scroll="plan">Plan</a>
+      <a href="#trainer" data-scroll="trainer">Warm-up</a>
+      <a href="#resources" data-scroll="resources">Resources</a>
     </div>
-  </header>
+    <button type="button" class="icon-btn" id="theme" aria-label="Switch between light and dark theme">◐</button>
+  </div>
+</nav>
 
-  <section>
-    <div class="section-head">
-      <span class="label">Weekly rhythm</span>
-      <h2>Five study days, two lighter ones</h2>
-      <p>About 5 to 6 hours a week. The same pattern repeats in every week below: 60 minutes on weekdays, 45 on weekends. Write each new noun with its article: der Tisch, not just Tisch.</p>
+<header class="hero" id="top">
+  <div class="in hero-in">
+    <div>
+      <p class="eyebrow">Goethe level A1 · 16 Nov 2026 to 7 Feb 2027</p>
+      <h1>German <span class="a1">A1</span></h1>
+      <p class="lede">A guided 12-week route from your first Guten Tag to a confident A1. Study one hour a day, time every session, tick off each step and test yourself with a quiz at the end of every week.</p>
+      <div class="arts" aria-hidden="true"><span class="art der">der</span><span class="art die">die</span><span class="art das">das</span></div>
+      <ul class="facts"><li><b>12</b> weeks</li><li><b>84</b> timed sessions</li><li><b>60</b> quiz questions</li></ul>
     </div>
-    <div class="days">
-      <div class="day new"><span class="d">Mon</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day talk"><span class="d">Tue</span><span class="t">Listening, speaking, flashcards</span></div>
-      <div class="day new"><span class="d">Wed</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day talk"><span class="d">Thu</span><span class="t">Listening, speaking, flashcards</span></div>
-      <div class="day new"><span class="d">Fri</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day rest"><span class="d">Sat</span><span class="t">Review, short writing task</span></div>
-      <div class="day rest"><span class="d">Sun</span><span class="t">Mini-quiz, mistakes notebook</span></div>
+    <section class="focus" id="today" aria-label="Today’s session">
+      <div class="focus-top"><span class="eyebrow" id="focus-kicker">Today’s session</span><span class="pill" id="focus-pill">Ready</span></div>
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="54"></circle><circle class="ring-fg" id="ring" cx="60" cy="60" r="54" transform="rotate(-90 60 60)"></circle></svg>
+        <div class="ring-mid"><span class="focus-clock" id="focus-clock" role="timer">60:00</span><span class="focus-min" id="focus-min">60 min</span></div>
+      </div>
+      <h2 class="focus-task" id="focus-task">Loading</h2>
+      <p class="focus-meta" id="focus-meta"></p>
+      <div class="focus-btns">
+        <button type="button" class="btn primary" id="focus-go">Start</button>
+        <button type="button" class="btn" id="focus-reset">Reset</button>
+        <button type="button" class="btn" id="focus-open">Open in plan</button>
+      </div>
+    </section>
+  </div>
+</header>
+
+<main class="in main">
+  <div class="stats">
+    <div class="tile">
+      <span class="label">Overall progress</span>
+      <span class="v" id="st-pct">0<small>%</small></span>
+      <div class="bar" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div class="fill" id="fill"></div></div>
+      <button type="button" class="reset" id="reset">Clear all progress</button>
+    </div>
+    <div class="tile streak">
+      <span class="label">Day streak</span>
+      <span class="v" id="st-streak">0</span>
+      <span class="sub" id="st-streak-sub">Finish today’s session to start one</span>
+    </div>
+    <div class="tile">
+      <span class="label">Sessions done</span>
+      <span class="v" id="st-sess">0<small>/84</small></span>
+      <span class="sub" id="st-sess-sub"></span>
+    </div>
+    <div class="tile">
+      <span class="label">Quizzes taken</span>
+      <span class="v" id="st-quiz">0<small>/12</small></span>
+      <span class="sub" id="st-quiz-sub">Average score appears after your first quiz</span>
+    </div>
+  </div>
+
+  <section class="sec" id="plan" aria-labelledby="plan-h">
+    <div class="sec-head">
+      <span class="label">The plan</span>
+      <h2 id="plan-h">Twelve weeks, one week at a time</h2>
+      <p>Pick a week to open it. Each one has its topics, seven dated sessions with their own timers, and a quiz. Phases follow the three German genders: der for foundations, die for everyday situations, das for practical German.</p>
+    </div>
+    <div class="rhythm" aria-label="Weekly rhythm">
+      <div class="day new"><span class="d">Mon · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Tue · 60 min</span><span class="t">Listening, flashcards</span></div>
+      <div class="day new"><span class="d">Wed · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Thu · 60 min</span><span class="t">Speaking, flashcards</span></div>
+      <div class="day new"><span class="d">Fri · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day rest"><span class="d">Sat · 45 min</span><span class="t">Review, short writing task</span></div>
+      <div class="day rest"><span class="d">Sun · 45 min</span><span class="t">Mini-quiz, mistakes notebook</span></div>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Choose a week"></div>
+    <div id="weeks"></div>
+  </section>
+
+  <section class="sec" id="trainer" aria-labelledby="trainer-h">
+    <div class="sec-head">
+      <span class="label">Warm-up</span>
+      <h2 id="trainer-h">Der, die or das?</h2>
+      <p>Every German noun has a gender, and you only learn it by seeing it again and again. Pick the right article for each word and build a streak.</p>
+    </div>
+    <div class="trainer" id="trainer-box">
+      <div class="t-card">
+        <div class="t-line"><span class="t-art" id="t-art">___</span><span class="t-word" id="t-word"></span></div>
+        <div class="t-mean" id="t-mean"></div>
+      </div>
+      <div class="t-side">
+        <div class="t-stats"><span>Streak <b id="t-streak">0</b></span><span>Best <b id="t-best">0</b></span><span><b id="t-right">0</b> of <b id="t-total">0</b> correct</span></div>
+        <div class="gbtns">
+          <button type="button" class="gbtn der" data-a="der">der</button>
+          <button type="button" class="gbtn die" data-a="die">die</button>
+          <button type="button" class="gbtn das" data-a="das">das</button>
+        </div>
+        <div class="t-fb" id="t-fb" aria-live="polite"></div>
+        <button type="button" class="tb go" id="t-next" hidden>Next noun</button>
+      </div>
     </div>
   </section>
 
-  <div id="phases" style="display:flex;flex-direction:column;gap:48px"></div>
-
-  <section>
+  <section class="sec" id="resources" aria-labelledby="res-h">
+    <div class="sec-head">
+      <span class="label">Resources</span>
+      <h2 id="res-h">Everything you need, nothing you don’t</h2>
+    </div>
+    <div class="res">
+      <div class="rcard" style="--c: var(--der)"><h3>Course</h3><p>Netzwerk neu A1, Menschen A1, or the free Nicos Weg course from Deutsche Welle.</p></div>
+      <div class="rcard" style="--c: var(--die)"><h3>Vocabulary</h3><p>Anki or Quizlet, 10 to 15 new words a day, always with the article.</p></div>
+      <div class="rcard" style="--c: var(--das)"><h3>Listening</h3><p>The Slow German podcast and DW’s Langsam gesprochene Nachrichten.</p></div>
+      <div class="rcard" style="--c: var(--gold)"><h3>Speaking</h3><p>A language exchange partner on Tandem or HelloTalk, 15 minutes twice a week.</p></div>
+    </div>
     <div class="two">
-      <div class="phase">
-        <h2>Resources</h2>
-        <ul class="list">
-          <li><b>Course</b><span>Netzwerk neu A1, Menschen A1, or the free Nicos Weg course from Deutsche Welle.</span></li>
-          <li><b>Vocabulary</b><span>Anki or Quizlet, 10 to 15 new words a day.</span></li>
-          <li><b>Listening</b><span>Slow German podcast and DW's Langsam gesprochene Nachrichten.</span></li>
-          <li><b>Speaking</b><span>A language exchange partner on Tandem or HelloTalk, 15 minutes twice a week.</span></li>
-        </ul>
-      </div>
-      <div class="phase">
-        <h2>Habits that help</h2>
+      <div class="col" style="gap:16px">
+        <h2 style="font-size:1.5rem;font-weight:800;letter-spacing:-0.02em">Habits that help</h2>
         <ul class="list">
           <li><b>Say it out loud</b><span>Read your sentences aloud every day, even when you study alone.</span></li>
           <li><b>Keep a mistakes notebook</b><span>Write each error with its correction and reread it every weekend.</span></li>
           <li><b>Short and daily</b><span>An hour every day beats a five-hour session once a week.</span></li>
         </ul>
-        <div class="exam"><b>Booked an exam or visa appointment?</b> Count back from the date and make that week your week 12 mock exam. Shorten or stretch the earlier weeks to fit.</div>
       </div>
+      <div class="exam"><b>Booked an exam or visa appointment?</b> Count back from the date and make that week your week 12 mock exam. Shorten or stretch the earlier weeks to fit. The Goethe-Institut estimates 60 to 150 hours of instruction for A1.</div>
     </div>
   </section>
+</main>
 
-  <footer>Rough guide: the Goethe-Institut estimates 60 to 150 hours of instruction for A1.</footer>
-</div>
+<footer><div class="in"><span>German A1 study plan · 12 weeks</span><span>Your progress is saved in this browser only.</span></div></footer>
 
 <script>
 (function () {
-  var START = new Date(2026, 10, 16); // Monday 16 Nov 2026
+  "use strict";
   var DAY = 86400000;
+  var START = new Date(2026, 10, 16); // Monday 16 Nov 2026
   var DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
   var PHASES = [
-    { cls: "der", name: "Foundations", range: "Weeks 1 to 4", color: "var(--der)", weeks: [
+    { cls: "der", name: "Foundations", weeks: [
       ["Sounds and greetings", ["Alphabet and pronunciation", "Greetings", "Introduce yourself: Ich heiße…, Ich komme aus…"]],
       ["Numbers and time", ["Numbers, days and months", "Telling the time", "The verbs sein and haben"]],
       ["First sentences", ["Regular verb conjugation", "Basic sentence order", "Yes/no questions and W-questions: Wer, Was, Wo, Wann"]],
       ["Articles and nouns", ["der, die, das and ein, eine", "Noun gender and plurals", "Review and first mini-test"]]
     ]},
-    { cls: "die", name: "Everyday situations", range: "Weeks 5 to 8", color: "var(--die)", weeks: [
+    { cls: "die", name: "Everyday situations", weeks: [
       ["People", ["Family", "Jobs", "Describing people"]],
       ["Food and shopping", ["Food and drinks", "Ordering in a café or restaurant", "Prices and shopping"]],
       ["Wanting and doing", ["Accusative case", "möchten and können", "Negation with nicht and kein"]],
       ["Daily routine", ["Your daily routine", "Separable verbs: aufstehen, einkaufen", "Review test"]]
     ]},
-    { cls: "das", name: "Practical German", range: "Weeks 9 to 12", color: "var(--das)", weeks: [
+    { cls: "das", name: "Practical German", weeks: [
       ["Getting around", ["Asking for and giving directions", "Places in the city and transport", "Prepositions in, an, auf"]],
       ["Home and appointments", ["Housing, rooms and furniture", "Making appointments"]],
       ["Past and paperwork", ["First look at the Perfekt with haben and sein", "Filling in forms", "Writing short messages"]],
@@ -244,16 +465,6 @@ footer { color: var(--muted); font-size: 0.85rem; }
         ["Mock exam: listening and reading", "Mock exam: writing and speaking", "Fix your weak spots"]]
     ]}
   ];
-
-  var KEY = "german-a1-plan-v1";
-  var done = {};
-  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
-  function fmtDate(d) { return d.getDate() + " " + MON[d.getMonth()]; }
-  function fmtClock(sec) {
-    var m = Math.floor(sec / 60), s = sec % 60;
-    return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
-  }
 
   /* Weekly quizzes: [question, correct answer, [wrong answers], explanation]. Options are shuffled when shown. */
   var QUIZ = {
@@ -342,38 +553,72 @@ footer { color: var(--muted); font-size: 0.85rem; }
       ["Which sentence fits at the bakery?", "Ich hätte gern zwei Brötchen, bitte.", ["Zwei Brötchen geben.", "Ich will zwei Brötchen jetzt.", "Gib mir Brötchen zwei."], "Ich hätte gern plus bitte is polite and natural when ordering."]
     ]
   };
-  var QKEY = "german-a1-plan-quiz-v1";
-  var best = {};
-  try { best = JSON.parse(localStorage.getItem(QKEY) || "{}") || {}; } catch (e) { best = {}; }
-  function saveBest() { try { localStorage.setItem(QKEY, JSON.stringify(best)); } catch (e) {} }
+
+  /* Article trainer: [noun, article, English, optional tip] */
+  var NOUNS = [
+    ["Tisch", "der", "table", ""], ["Stuhl", "der", "chair", ""], ["Apfel", "der", "apple", ""], ["Bahnhof", "der", "train station", ""],
+    ["Käse", "der", "cheese", ""], ["Kaffee", "der", "coffee", ""], ["Hund", "der", "dog", ""], ["Mann", "der", "man", "Male people are almost always der."],
+    ["Bruder", "der", "brother", "Male people are almost always der."], ["Vater", "der", "father", "Male people are almost always der."],
+    ["Lehrer", "der", "teacher (male)", "Male people are almost always der."], ["Garten", "der", "garden", ""],
+    ["Montag", "der", "Monday", "Days, months and seasons are all der."], ["Sommer", "der", "summer", "Days, months and seasons are all der."],
+    ["Bus", "der", "bus", ""], ["Zug", "der", "train", ""], ["Schlüssel", "der", "key", ""],
+    ["Frau", "die", "woman", "Female people are almost always die."], ["Mutter", "die", "mother", "Female people are almost always die."],
+    ["Schwester", "die", "sister", "Female people are almost always die."], ["Lampe", "die", "lamp", "Many nouns ending in -e are die."],
+    ["Küche", "die", "kitchen", "Many nouns ending in -e are die."], ["Wohnung", "die", "apartment", "Nouns ending in -ung are always die."],
+    ["Zeitung", "die", "newspaper", "Nouns ending in -ung are always die."], ["Rechnung", "die", "bill", "Nouns ending in -ung are always die."],
+    ["Stadt", "die", "city", ""], ["Straße", "die", "street", "Many nouns ending in -e are die."], ["Uhr", "die", "clock, o’clock", ""],
+    ["Butter", "die", "butter", ""], ["Tür", "die", "door", ""], ["Woche", "die", "week", "Many nouns ending in -e are die."],
+    ["Schule", "die", "school", "Many nouns ending in -e are die."], ["Katze", "die", "cat", "Many nouns ending in -e are die."],
+    ["Milch", "die", "milk", ""], ["Familie", "die", "family", ""],
+    ["Kind", "das", "child", ""], ["Buch", "das", "book", ""], ["Brot", "das", "bread", ""], ["Haus", "das", "house", ""],
+    ["Auto", "das", "car", ""], ["Wasser", "das", "water", ""], ["Zimmer", "das", "room", ""], ["Bett", "das", "bed", ""],
+    ["Fenster", "das", "window", ""], ["Mädchen", "das", "girl", "Nouns ending in -chen are always das, even for people."],
+    ["Telefon", "das", "phone", ""], ["Bad", "das", "bathroom", ""], ["Jahr", "das", "year", ""], ["Geld", "das", "money", ""],
+    ["Obst", "das", "fruit", ""], ["Fahrrad", "das", "bicycle", ""]
+  ];
+
+  /* ---------- helpers & storage ---------- */
+  var KEY = "german-a1-plan-v1", QKEY = "german-a1-plan-quiz-v1", TKEY = "german-a1-plan-trainer-v1", THEMEKEY = "german-a1-plan-theme";
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
+  function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  var done = load(KEY), best = load(QKEY), tstat = load(TKEY);
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function fmtDate(d) { return d.getDate() + " " + MON[d.getMonth()]; }
+  function fmtClock(sec) { var m = Math.floor(sec / 60), s = sec % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
+  function dayDate(wk, i) { return new Date(2026, 10, 16 + (wk - 1) * 7 + i); }
+  function smooth() { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var todayOff = Math.round((today - START) / DAY);
+  var currentWeek = todayOff >= 0 && todayOff < 84 ? Math.floor(todayOff / 7) + 1 : 0;
+
+  var WEEKS = [];
+  PHASES.forEach(function (p) { p.weeks.forEach(function (w) { WEEKS.push({ n: WEEKS.length + 1, p: p, title: w[0], topics: w[1], lessons: w[2] }); }); });
+
+  function sessionTasks(topics, lessons) {
+    var l = lessons || ["Lesson: " + topics[0], "Lesson: " + topics[1], topics[2] ? "Lesson: " + topics[2] : "Review and practise this week’s topics"];
+    return [l[0], "Listening practice + flashcards", l[1], "Speaking practice + flashcards", l[2], "Review + short writing task", "Mini-quiz + mistakes notebook"];
+  }
+
+  /* ---------- quiz ---------- */
   function quizCount() { return Object.keys(best).length; }
   function bestText(wk) {
     var n = QUIZ[wk].length;
     return best[wk] != null ? n + " questions · best score " + best[wk] + "/" + n : n + " questions · not taken yet";
   }
-  function shuffle(a) {
-    a = a.slice();
-    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
-    return a;
-  }
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
   function quizMarkup(wk) {
-    return '<div class="quiz" data-wk="' + wk + '"><div class="quiz-bar"><div class="col"><h4>Week ' + wk + ' quiz</h4><span class="sub quiz-best"></span></div>' +
+    return '<div class="quiz" data-wk="' + wk + '"><div class="quiz-bar"><div class="col" style="gap:2px"><h4>Week ' + wk + ' quiz</h4><span class="sub quiz-best"></span></div>' +
       '<button type="button" class="tb go quiz-open">Start quiz</button></div><div class="quiz-panel" hidden></div></div>';
   }
   function resetQuizzes() {
-    best = {}; saveBest();
+    best = {}; store(QKEY, best);
     Array.prototype.forEach.call(document.querySelectorAll(".quiz"), function (r) {
       r.querySelector(".quiz-best").textContent = bestText(r.getAttribute("data-wk"));
     });
   }
-  function initQuiz(card, wk) {
-    var root = card.querySelector(".quiz");
+  function initQuiz(root, wk) {
     var panel = root.querySelector(".quiz-panel");
     var openBtn = root.querySelector(".quiz-open");
     var bestEl = root.querySelector(".quiz-best");
@@ -414,10 +659,7 @@ footer { color: var(--muted); font-size: 0.85rem; }
         });
         list.appendChild(b);
       });
-      next.addEventListener("click", function () {
-        idx++;
-        if (idx < qs.length) show(); else finish();
-      });
+      next.addEventListener("click", function () { idx++; if (idx < qs.length) show(); else finish(); });
       panel.appendChild(list);
       panel.appendChild(fb);
       panel.appendChild(next);
@@ -425,11 +667,11 @@ footer { color: var(--muted); font-size: 0.85rem; }
 
     function finish() {
       var n = qs.length;
-      if (best[wk] == null || score > best[wk]) { best[wk] = score; saveBest(); }
+      if (best[wk] == null || score > best[wk]) { best[wk] = score; store(QKEY, best); }
       bestEl.textContent = bestText(wk);
       panel.textContent = "";
       panel.appendChild(el("div", "q-meta", "Result"));
-      panel.appendChild(el("p", "q-score", score + " of " + n + " correct"));
+      panel.appendChild(el("p", "q-score" + (score === n ? " gold" : ""), score + " of " + n + " correct"));
       panel.appendChild(el("p", "q-text", score === n ? "Perfect. You are ready for the next week." : (score >= n - 1 ? "Well done. Skim the topics you missed, then move on." : "Revisit this week’s topics and try again.")));
       var again = el("button", "tb go q-again", "Try again");
       again.type = "button";
@@ -438,11 +680,7 @@ footer { color: var(--muted); font-size: 0.85rem; }
       update();
     }
 
-    function start() {
-      qs = shuffle(QUIZ[wk]); idx = 0; score = 0;
-      panel.hidden = false;
-      show();
-    }
+    function start() { qs = shuffle(QUIZ[wk]); idx = 0; score = 0; panel.hidden = false; show(); }
 
     openBtn.addEventListener("click", function () {
       if (panel.hidden) { start(); openBtn.textContent = "Close quiz"; }
@@ -450,97 +688,141 @@ footer { color: var(--muted); font-size: 0.85rem; }
     });
   }
 
-  var today = new Date(); today.setHours(0, 0, 0, 0);
-  var current = Math.floor((today - START) / (7 * DAY)) + 1;
+  /* ---------- build week panels and navigator ---------- */
+  var panels = {}, chips = {}, timersByKey = {}, timers = [], selected = 1, focusKey = null;
+  var weeksHost = $("weeks"), chipsHost = $("chips");
 
-  function sessionTasks(topics, lessons) {
-    var l = lessons || [
-      "Lesson: " + topics[0],
-      "Lesson: " + topics[1],
-      topics[2] ? "Lesson: " + topics[2] : "Review and practise this week's topics"
-    ];
-    return [l[0], "Listening practice + flashcards", l[1], "Speaking practice + flashcards", l[2], "Review + short writing task", "Mini-quiz + mistakes notebook"];
+  function buildWeek(w) {
+    var s = dayDate(w.n, 0), e = dayDate(w.n, 6);
+    var art = document.createElement("article");
+    art.className = "wp";
+    art.setAttribute("data-wk", w.n);
+    art.hidden = true;
+    art.style.setProperty("--c", "var(--" + w.p.cls + ")");
+    art.style.setProperty("--cs", "var(--" + w.p.cls + "-soft)");
+    var h = '<div class="wp-head"><div class="wp-num" aria-hidden="true">' + (w.n < 10 ? "0" : "") + w.n + '</div>' +
+      '<div class="wp-title"><span class="wp-label">' + w.p.name + ' · ' + fmtDate(s) + ' to ' + fmtDate(e) + (w.n === currentWeek ? ' <em class="badge">This week</em>' : '') + '</span><h3>' + w.title + '</h3></div>' +
+      '<div class="wp-side"><div class="mini" role="img" aria-label="Week progress"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="m-bg" cx="24" cy="24" r="20"></circle><circle class="m-fg" cx="24" cy="24" r="20" transform="rotate(-90 24 24)"></circle></svg><span class="m-pct">0%</span></div>' +
+      '<div class="wp-nav"><button type="button" class="arrow prev" aria-label="Previous week">‹</button><button type="button" class="arrow next" aria-label="Next week">›</button></div></div></div>';
+    h += '<div class="wp-body"><div class="col"><h4>Topics</h4><ul class="items">';
+    w.topics.forEach(function (item, i) {
+      var id = "w" + w.n + "-" + i;
+      h += '<li><label><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + "><span>" + item + "</span></label></li>";
+    });
+    h += '</ul></div><div class="col"><h4>Sessions</h4><ul class="sessions">';
+    sessionTasks(w.topics, w.lessons).forEach(function (task, i) {
+      var d = dayDate(w.n, i);
+      var mins = i < 5 ? 60 : 45;
+      var id = "s" + w.n + "-" + i;
+      var isToday = d.getTime() === today.getTime();
+      h += '<li class="ses' + (isToday ? " istoday" : "") + (done[id] ? " finished" : "") + '" data-min="' + mins + '" data-k="' + id + '" data-wk="' + w.n + '" data-i="' + i + '" data-label="' + DOW[i] + " " + fmtDate(d) + '">' +
+        '<label class="ses-main"><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + '><span class="ses-text">' +
+        '<span class="ses-day">' + DOW[i] + " " + fmtDate(d) + " · " + mins + " min" + (isToday ? " · <em>Today</em>" : "") + "</span>" +
+        '<span class="ses-task">' + task + "</span></span></label>" +
+        '<div class="ses-ctl"><span class="clock" role="timer">' + fmtClock(mins * 60) + '</span>' +
+        '<button type="button" class="tb go">Start</button><button type="button" class="tb rs">Reset</button></div></li>';
+    });
+    h += "</ul></div></div>" + quizMarkup(w.n);
+    art.innerHTML = h;
+    initQuiz(art.querySelector(".quiz"), w.n);
+    art.querySelector(".prev").addEventListener("click", function () { select(selected - 1); });
+    art.querySelector(".next").addEventListener("click", function () { select(selected + 1); });
+    panels[w.n] = art;
+    weeksHost.appendChild(art);
   }
 
-  var host = document.getElementById("phases");
-  var n = 0;
   PHASES.forEach(function (p) {
-    var sec = document.createElement("section");
-    sec.className = "phase";
-    sec.innerHTML = '<div class="phase-head"><span class="art ' + p.cls + '">' + p.cls + '</span><h2>' + p.name + '</h2><span class="label">' + p.range + '</span></div>';
-    var list = document.createElement("div");
-    list.className = "weeks";
-    p.weeks.forEach(function (w) {
-      n += 1;
-      var wk = n;
-      var s = new Date(START.getTime() + (wk - 1) * 7 * DAY);
-      var e = new Date(s.getTime() + 6 * DAY);
-      var card = document.createElement("div");
-      card.className = "week" + (wk === current ? " now" : "");
-      card.style.setProperty("--c", p.color);
-
-      var html = '<div class="week-top"><span class="label">Week ' + wk + " · " + fmtDate(s) + " to " + fmtDate(e) + "</span>" +
-        (wk === current ? '<span class="badge">This week</span>' : "") + "</div><h3>" + w[0] + "</h3>";
-      html += '<div class="wk-body"><div class="col"><h4>Topics</h4><ul class="items">';
-      w[1].forEach(function (item, i) {
-        var id = "w" + wk + "-" + i;
-        html += '<li><label><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + "><span>" + item + "</span></label></li>";
-      });
-      html += '</ul></div><div class="col"><h4>Sessions</h4><ul class="sessions">';
-      var tasks = sessionTasks(w[1], w[2]);
-      tasks.forEach(function (task, i) {
-        var d = new Date(s.getTime() + i * DAY);
-        var mins = i < 5 ? 60 : 45;
-        var id = "s" + wk + "-" + i;
-        var isToday = d.getTime() === today.getTime();
-        html += '<li class="ses' + (done[id] ? " finished" : "") + '" data-min="' + mins + '" data-k="' + id + '">' +
-          '<label class="ses-main"><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + '><span class="ses-text">' +
-          '<span class="ses-day">' + DOW[i] + " " + fmtDate(d) + " · " + mins + " min" + (isToday ? " · <em>Today</em>" : "") + "</span>" +
-          '<span class="ses-task">' + task + "</span></span></label>" +
-          '<div class="ses-ctl"><span class="clock" role="timer">' + fmtClock(mins * 60) + '</span>' +
-          '<button type="button" class="tb go">Start</button><button type="button" class="tb rs">Reset</button></div></li>';
-      });
-      html += "</ul></div></div>" + quizMarkup(wk);
-      card.innerHTML = html;
-      initQuiz(card, wk);
-      list.appendChild(card);
+    var group = el("div", "cgroup");
+    group.style.setProperty("--c", "var(--" + p.cls + ")");
+    group.appendChild(el("span", "cgroup-l", p.cls + " · " + p.name));
+    var row = el("div", "cgrow");
+    WEEKS.filter(function (w) { return w.p === p; }).forEach(function (w) {
+      buildWeek(w);
+      var c = el("button", "chip", String(w.n));
+      c.type = "button";
+      c.style.setProperty("--c", "var(--" + p.cls + ")");
+      c.style.setProperty("--cs", "var(--" + p.cls + "-soft)");
+      if (w.n === currentWeek) c.classList.add("now");
+      c.setAttribute("aria-label", "Week " + w.n + ": " + w.title);
+      c.title = "Week " + w.n + ": " + w.title;
+      c.addEventListener("click", function () { select(w.n); });
+      chips[w.n] = c;
+      row.appendChild(c);
     });
-    sec.appendChild(list);
-    host.appendChild(sec);
+    group.appendChild(row);
+    chipsHost.appendChild(group);
   });
 
-  /* Progress */
-  var count = document.getElementById("count");
-  var fill = document.getElementById("fill");
-  var bar = document.getElementById("bar");
-  var sub = document.getElementById("sub");
+  function select(n, silent) {
+    n = Math.max(1, Math.min(12, n));
+    WEEKS.forEach(function (w) {
+      panels[w.n].hidden = w.n !== n;
+      chips[w.n].setAttribute("aria-current", w.n === n ? "true" : "false");
+    });
+    selected = n;
+    panels[n].querySelector(".prev").disabled = n === 1;
+    panels[n].querySelector(".next").disabled = n === 12;
+    if (!silent) { try { if (location.hash !== "#week-" + n) location.hash = "week-" + n; } catch (e) {} }
+  }
+  window.addEventListener("hashchange", function () {
+    var m = /^#week-(\d+)$/.exec(location.hash);
+    if (m) select(parseInt(m[1], 10), true);
+  });
+
+  /* ---------- progress, stats, streak ---------- */
+  function sessDone(off) { return off >= 0 && off < 84 && !!done["s" + (Math.floor(off / 7) + 1) + "-" + (off % 7)]; }
+  function streak() {
+    var i = todayOff, s = 0;
+    if (!sessDone(i)) i--;
+    while (sessDone(i)) { s++; i--; }
+    return s;
+  }
+  var RING_MINI = 125.664;
   function update() {
-    var boxes = host.querySelectorAll("input[type=checkbox]");
-    var tot = 0, dn = 0, sT = 0, sD = 0, tT = 0, tD = 0;
-    Array.prototype.forEach.call(boxes, function (b) {
-      var isS = b.getAttribute("data-k").charAt(0) === "s";
-      tot++; if (b.checked) dn++;
-      if (isS) { sT++; if (b.checked) sD++; } else { tT++; if (b.checked) tD++; }
+    var tot = 12, dn = quizCount(), sT = 0, sD = 0;
+    WEEKS.forEach(function (w) {
+      var boxes = panels[w.n].querySelectorAll("input[type=checkbox]");
+      var t = 0, d = 0;
+      Array.prototype.forEach.call(boxes, function (b) {
+        t++; if (b.checked) d++;
+        if (b.getAttribute("data-k").charAt(0) === "s") { sT++; if (b.checked) sD++; }
+      });
+      tot += t; dn += d;
+      var wt = t + 1, wd = d + (best[w.n] != null ? 1 : 0);
+      var frac = wd / wt;
+      panels[w.n].querySelector(".m-fg").style.strokeDashoffset = String(RING_MINI * (1 - frac));
+      panels[w.n].querySelector(".m-pct").textContent = Math.round(frac * 100) + "%";
+      chips[w.n].classList.toggle("complete", frac === 1);
     });
     var pct = Math.round((dn / tot) * 100);
-    count.textContent = pct + "% done";
-    fill.style.width = pct + "%";
-    bar.setAttribute("aria-valuenow", pct);
-    sub.textContent = sD + " of " + sT + " sessions · " + tD + " of " + tT + " topics · " + quizCount() + " of 12 quizzes taken";
+    $("st-pct").innerHTML = pct + "<small>%</small>";
+    $("fill").style.width = pct + "%";
+    $("bar").setAttribute("aria-valuenow", pct);
+    var st = streak();
+    $("st-streak").textContent = st;
+    $("st-streak-sub").textContent = st === 0 ? "Finish today’s session to start one" : (st === 1 ? "day in a row" : "days in a row");
+    $("st-sess").innerHTML = sD + "<small>/" + sT + "</small>";
+    $("st-sess-sub").textContent = (sT - sD) + " to go";
+    var qn = quizCount(), qsum = 0;
+    Object.keys(best).forEach(function (k) { qsum += best[k]; });
+    $("st-quiz").innerHTML = qn + "<small>/12</small>";
+    $("st-quiz-sub").textContent = qn ? "Average score " + Math.round((qsum / (qn * 5)) * 100) + "%" : "Average score appears after your first quiz";
+    syncFocus();
   }
+
   function setDone(k, val) {
     if (val) done[k] = 1; else delete done[k];
-    Array.prototype.forEach.call(host.querySelectorAll('input[data-k="' + k + '"]'), function (i) { i.checked = !!val; });
-    var row = host.querySelector('.ses[data-k="' + k + '"]');
+    Array.prototype.forEach.call(weeksHost.querySelectorAll('input[data-k="' + k + '"]'), function (i) { i.checked = !!val; });
+    var row = weeksHost.querySelector('.ses[data-k="' + k + '"]');
     if (row) row.classList.toggle("finished", !!val);
-    save(); update();
+    store(KEY, done); update();
   }
-  host.addEventListener("change", function (ev) {
+  weeksHost.addEventListener("change", function (ev) {
     var k = ev.target && ev.target.getAttribute && ev.target.getAttribute("data-k");
     if (k) setDone(k, ev.target.checked);
   });
 
-  /* Session timers */
+  /* ---------- session timers ---------- */
   var audio = null;
   function beep() {
     try {
@@ -556,20 +838,20 @@ footer { color: var(--muted); font-size: 0.85rem; }
       });
     } catch (e) {}
   }
-  var timers = [];
-  Array.prototype.forEach.call(host.querySelectorAll(".ses"), function (row) {
+  Array.prototype.forEach.call(weeksHost.querySelectorAll(".ses"), function (row) {
     var t = { row: row, key: row.getAttribute("data-k"), total: parseInt(row.getAttribute("data-min"), 10) * 60, left: 0, end: 0, running: false };
     t.left = t.total;
     t.clock = row.querySelector(".clock");
     t.go = row.querySelector(".go");
     t.rs = row.querySelector(".rs");
-    var label = row.querySelector(".ses-day").textContent.split(" · ")[0];
+    var label = row.getAttribute("data-label");
     t.render = function () {
       t.clock.textContent = t.left <= 0 ? "Done" : fmtClock(t.left);
       t.go.textContent = t.running ? "Pause" : (t.left <= 0 ? "Restart" : (t.left < t.total ? "Resume" : "Start"));
       t.go.setAttribute("aria-label", t.go.textContent + " timer for " + label);
       t.rs.setAttribute("aria-label", "Reset timer for " + label);
       row.classList.toggle("running", t.running);
+      if (focusKey && t.key === focusKey) syncFocus();
     };
     t.pause = function () {
       if (t.running) { t.left = Math.max(0, Math.ceil((t.end - Date.now()) / 1000)); t.running = false; }
@@ -585,8 +867,8 @@ footer { color: var(--muted); font-size: 0.85rem; }
       t.render();
     });
     t.rs.addEventListener("click", function () { t.running = false; t.left = t.total; t.render(); });
-    t.render();
     timers.push(t);
+    timersByKey[t.key] = t;
   });
   setInterval(function () {
     timers.forEach(function (t) {
@@ -597,19 +879,132 @@ footer { color: var(--muted); font-size: 0.85rem; }
     });
   }, 250);
 
-  document.getElementById("reset").addEventListener("click", function () {
-    done = {};
-    resetQuizzes();
-    Array.prototype.forEach.call(host.querySelectorAll("input[type=checkbox]"), function (i) { i.checked = false; });
-    Array.prototype.forEach.call(host.querySelectorAll(".ses"), function (r) { r.classList.remove("finished"); });
-    timers.forEach(function (t) { t.running = false; t.left = t.total; t.render(); });
-    save(); update();
+  /* ---------- focus panel (today's session) ---------- */
+  var RING = 339.292;
+  var fEl = { box: $("today"), clock: $("focus-clock"), min: $("focus-min"), task: $("focus-task"), meta: $("focus-meta"), pill: $("focus-pill"), ring: $("ring"), go: $("focus-go"), rs: $("focus-reset"), open: $("focus-open"), kick: $("focus-kicker") };
+  if (todayOff < 0) focusKey = "s1-0";
+  else if (todayOff < 84) focusKey = "s" + (Math.floor(todayOff / 7) + 1) + "-" + (todayOff % 7);
+  else focusKey = null;
+
+  function syncFocus() {
+    if (!focusKey) {
+      fEl.box.classList.add("done"); fEl.box.classList.remove("running");
+      fEl.kick.textContent = "Plan finished"; fEl.pill.textContent = "Complete";
+      fEl.clock.textContent = "A1"; fEl.min.textContent = "12 of 12 weeks";
+      fEl.task.textContent = "You reached the end of the plan";
+      fEl.meta.textContent = "Retake any quiz or mock exam to keep your German sharp.";
+      fEl.ring.style.strokeDashoffset = "0";
+      fEl.go.hidden = true; fEl.rs.hidden = true; fEl.open.hidden = true;
+      return;
+    }
+    var t = timersByKey[focusKey];
+    var isDone = !!done[focusKey];
+    var wk = t.row.getAttribute("data-wk");
+    fEl.kick.textContent = todayOff < 0 ? "First session" : "Today’s session";
+    fEl.task.textContent = t.row.querySelector(".ses-task").textContent;
+    fEl.meta.textContent = "Week " + wk + " · " + t.row.getAttribute("data-label");
+    fEl.min.textContent = (t.total / 60) + " min";
+    var frac = isDone ? 1 : (t.total - t.left) / t.total;
+    fEl.ring.style.strokeDashoffset = String(RING * (1 - frac));
+    fEl.clock.textContent = isDone && !t.running ? "Done" : (t.left <= 0 ? "Done" : fmtClock(t.left));
+    fEl.box.classList.toggle("running", t.running);
+    fEl.box.classList.toggle("done", isDone && !t.running);
+    fEl.pill.textContent = t.running ? "In progress" : (isDone ? "Completed" : "Ready");
+    fEl.go.textContent = t.running ? "Pause" : (isDone ? "Study again" : (t.left < t.total ? "Resume" : "Start"));
+  }
+  fEl.go.addEventListener("click", function () { if (focusKey) timersByKey[focusKey].go.click(); });
+  fEl.rs.addEventListener("click", function () { if (focusKey) timersByKey[focusKey].rs.click(); });
+  fEl.open.addEventListener("click", function () {
+    if (!focusKey) return;
+    var row = timersByKey[focusKey].row;
+    select(parseInt(row.getAttribute("data-wk"), 10));
+    $("plan").scrollIntoView({ behavior: smooth(), block: "start" });
+    setTimeout(function () {
+      row.scrollIntoView({ behavior: smooth(), block: "center" });
+      row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+    }, 350);
   });
 
-  var line = document.getElementById("nowline");
-  if (current < 1) line.textContent = "Starts " + fmtDate(START);
-  else if (current > 12) line.textContent = "12-week plan finished";
-  else line.textContent = "Week " + current + " of 12";
+  /* ---------- article trainer ---------- */
+  (function () {
+    var deck = [], cur = null, answered = false, streakN = 0, right = 0, total = 0;
+    var best_ = tstat.best || 0;
+    var artEl = $("t-art"), wordEl = $("t-word"), meanEl = $("t-mean"), fb = $("t-fb"), nextBtn = $("t-next");
+    var btns = Array.prototype.slice.call(document.querySelectorAll(".gbtn"));
+    function stats() { $("t-streak").textContent = streakN; $("t-best").textContent = best_; $("t-right").textContent = right; $("t-total").textContent = total; }
+    function nextNoun() {
+      if (!deck.length) deck = shuffle(NOUNS.map(function (_, i) { return i; }));
+      cur = NOUNS[deck.pop()];
+      answered = false;
+      artEl.textContent = "___"; artEl.className = "t-art";
+      wordEl.textContent = cur[0]; meanEl.textContent = cur[2];
+      fb.textContent = ""; nextBtn.hidden = true;
+      btns.forEach(function (b) { b.disabled = false; b.classList.remove("right", "dim"); });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (answered) return;
+        answered = true; total++;
+        var a = b.getAttribute("data-a"), ok = a === cur[1];
+        if (ok) { right++; streakN++; if (streakN > best_) { best_ = streakN; tstat.best = best_; store(TKEY, tstat); } } else { streakN = 0; }
+        btns.forEach(function (x) {
+          x.disabled = true;
+          if (x.getAttribute("data-a") === cur[1]) x.classList.add("right"); else x.classList.add("dim");
+        });
+        artEl.textContent = cur[1]; artEl.className = "t-art " + cur[1];
+        fb.textContent = "";
+        fb.appendChild(el("strong", ok ? "ok" : "bad", ok ? "Correct. " : "Not quite. "));
+        fb.appendChild(document.createTextNode(cur[1] + " " + cur[0] + (cur[3] ? ". " + cur[3] : ".")));
+        nextBtn.hidden = false; nextBtn.focus();
+        stats();
+      });
+    });
+    nextBtn.addEventListener("click", nextNoun);
+    stats(); nextNoun();
+  })();
+
+  /* ---------- reset, theme, navigation ---------- */
+  $("reset").addEventListener("click", function () {
+    done = {}; store(KEY, done);
+    resetQuizzes();
+    Array.prototype.forEach.call(weeksHost.querySelectorAll("input[type=checkbox]"), function (i) { i.checked = false; });
+    Array.prototype.forEach.call(weeksHost.querySelectorAll(".ses"), function (r) { r.classList.remove("finished"); });
+    timers.forEach(function (t) { t.running = false; t.left = t.total; t.render(); });
+    update();
+  });
+
+  var root = document.documentElement;
+  try { var savedTheme = localStorage.getItem(THEMEKEY); if (savedTheme === "dark" || savedTheme === "light") root.setAttribute("data-theme", savedTheme); } catch (e) {}
+  $("theme").addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var nxt = cur === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", nxt);
+    try { localStorage.setItem(THEMEKEY, nxt); } catch (e) {}
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll("[data-scroll]"));
+  links.forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var t = $(a.getAttribute("data-scroll"));
+      if (t) t.scrollIntoView({ behavior: smooth(), block: "start" });
+    });
+  });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { if (a.getAttribute("data-scroll") === en.target.id) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    ["today", "plan", "trainer", "resources"].forEach(function (id) { var t = $(id); if (t) io.observe(t); });
+  }
+
+  /* ---------- start ---------- */
+  var startWeek = currentWeek || 1;
+  var hm = /^#week-(\d+)$/.exec(location.hash);
+  if (hm) startWeek = parseInt(hm[1], 10);
+  select(startWeek, true);
   update();
 })();
 </script>
