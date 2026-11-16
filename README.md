@@ -2,7 +2,7 @@
 
 A 12-week plan to reach German A1, built as a static website. Study one hour a day, time each session, tick off every step and test yourself with a quiz at the end of each week.
 
-**Live site:** `https://<your-username>.github.io/german-a1-study-plan/`
+**Live site:** `https://mein-deutsch-plan.vercel.app/`
 
 ## Screenshots
 
