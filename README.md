@@ -127,4 +127,12 @@ Cloud Infrastructure Management Engineering student at TEK-UP University, Tunisi
 
 ## License
 
-Personal learning project.
+Personal learning project. Add a license (for example MIT) if you want others to reuse it.
+
+---
+
+<p align="center">
+  <em>„Übung macht den Meister.“</em><br>
+  Practice makes perfect. Viel Erfolg und viel Spaß beim Lernen!<br>
+  Made with care by Ons Ajmi
+</p>
