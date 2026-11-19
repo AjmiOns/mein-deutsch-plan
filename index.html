@@ -370,16 +370,16 @@ footer .in { display: flex; justify-content: space-between; gap: 8px 24px; flex-
     <div class="sec-head">
       <span class="label">The plan</span>
       <h2 id="plan-h">Twelve weeks, one week at a time</h2>
-      <p>Pick a week to open it. Each one has its topics, seven dated sessions with their own timers, and a quiz. Phases follow the three German genders: der for foundations, die for everyday situations, das for practical German.</p>
+      <p>Pick a week to open it. Each one has its topics, seven sessions (Day 1 to Day 7) with their own timers, and a quiz. Phases follow the three German genders: der for foundations, die for everyday situations, das for practical German.</p>
     </div>
     <div class="rhythm" aria-label="Weekly rhythm">
-      <div class="day new"><span class="d">Mon · 60 min</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day talk"><span class="d">Tue · 60 min</span><span class="t">Listening, flashcards</span></div>
-      <div class="day new"><span class="d">Wed · 60 min</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day talk"><span class="d">Thu · 60 min</span><span class="t">Speaking, flashcards</span></div>
-      <div class="day new"><span class="d">Fri · 60 min</span><span class="t">New lesson + vocabulary</span></div>
-      <div class="day rest"><span class="d">Sat · 45 min</span><span class="t">Review, short writing task</span></div>
-      <div class="day rest"><span class="d">Sun · 45 min</span><span class="t">Mini-quiz, mistakes notebook</span></div>
+      <div class="day new"><span class="d">Day 1 · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Day 2 · 60 min</span><span class="t">Listening, flashcards</span></div>
+      <div class="day new"><span class="d">Day 3 · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day talk"><span class="d">Day 4 · 60 min</span><span class="t">Speaking, flashcards</span></div>
+      <div class="day new"><span class="d">Day 5 · 60 min</span><span class="t">New lesson + vocabulary</span></div>
+      <div class="day rest"><span class="d">Day 6 · 45 min</span><span class="t">Review, short writing task</span></div>
+      <div class="day rest"><span class="d">Day 7 · 45 min</span><span class="t">Mini-quiz, mistakes notebook</span></div>
     </div>
     <div class="chips" id="chips" role="group" aria-label="Choose a week"></div>
     <div id="weeks"></div>
@@ -701,7 +701,7 @@ footer .in { display: flex; justify-content: space-between; gap: 8px 24px; flex-
     art.style.setProperty("--c", "var(--" + w.p.cls + ")");
     art.style.setProperty("--cs", "var(--" + w.p.cls + "-soft)");
     var h = '<div class="wp-head"><div class="wp-num" aria-hidden="true">' + (w.n < 10 ? "0" : "") + w.n + '</div>' +
-      '<div class="wp-title"><span class="wp-label">' + w.p.name + ' · ' + fmtDate(s) + ' to ' + fmtDate(e) + (w.n === currentWeek ? ' <em class="badge">This week</em>' : '') + '</span><h3>' + w.title + '</h3></div>' +
+      '<div class="wp-title"><span class="wp-label">' + w.p.name + ' · Week ' + w.n + (w.n === currentWeek ? ' <em class="badge">This week</em>' : '') + '</span><h3>' + w.title + '</h3></div>' +
       '<div class="wp-side"><div class="mini" role="img" aria-label="Week progress"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="m-bg" cx="24" cy="24" r="20"></circle><circle class="m-fg" cx="24" cy="24" r="20" transform="rotate(-90 24 24)"></circle></svg><span class="m-pct">0%</span></div>' +
       '<div class="wp-nav"><button type="button" class="arrow prev" aria-label="Previous week">‹</button><button type="button" class="arrow next" aria-label="Next week">›</button></div></div></div>';
     h += '<div class="wp-body"><div class="col"><h4>Topics</h4><ul class="items">';
@@ -715,9 +715,9 @@ footer .in { display: flex; justify-content: space-between; gap: 8px 24px; flex-
       var mins = i < 5 ? 60 : 45;
       var id = "s" + w.n + "-" + i;
       var isToday = d.getTime() === today.getTime();
-      h += '<li class="ses' + (isToday ? " istoday" : "") + (done[id] ? " finished" : "") + '" data-min="' + mins + '" data-k="' + id + '" data-wk="' + w.n + '" data-i="' + i + '" data-label="' + DOW[i] + " " + fmtDate(d) + '">' +
+      h += '<li class="ses' + (isToday ? " istoday" : "") + (done[id] ? " finished" : "") + '" data-min="' + mins + '" data-k="' + id + '" data-wk="' + w.n + '" data-i="' + i + '" data-label="Day ' + (i + 1) + '">' +
         '<label class="ses-main"><input type="checkbox" data-k="' + id + '"' + (done[id] ? " checked" : "") + '><span class="ses-text">' +
-        '<span class="ses-day">' + DOW[i] + " " + fmtDate(d) + " · " + mins + " min" + (isToday ? " · <em>Today</em>" : "") + "</span>" +
+        '<span class="ses-day">Day ' + (i + 1) + " · " + mins + " min" + (isToday ? " · <em>Today</em>" : "") + "</span>" +
         '<span class="ses-task">' + task + "</span></span></label>" +
         '<div class="ses-ctl"><span class="clock" role="timer">' + fmtClock(mins * 60) + '</span>' +
         '<button type="button" class="tb go">Start</button><button type="button" class="tb rs">Reset</button></div></li>';

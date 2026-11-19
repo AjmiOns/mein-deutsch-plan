@@ -46,12 +46,28 @@ Weekly rhythm:
 
 | Day | Session |
 | --- | --- |
-| Mon, Wed, Fri | New lesson and vocabulary (60 min) |
-| Tue, Thu | Listening or speaking and flashcards (60 min) |
-| Sat | Review and a short writing task (45 min) |
-| Sun | Mini-quiz and mistakes notebook (45 min) |
+| Day 1, 3, 5 | New lesson and vocabulary (60 min) |
+| Day 2, 4 | Listening or speaking and flashcards (60 min) |
+| Day 6 | Review and a short writing task (45 min) |
+| Day 7 | Mini-quiz and mistakes notebook (45 min) |
 
+## Run it locally
 
+No build step and no dependencies. Open `index.html` in a browser, or serve the folder:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
+
+## Deploy with GitHub Pages
+
+1. Push this repo to GitHub.
+2. Go to **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select your main branch and the `/ (root)` folder, then save.
+5. After a minute the site is live at `https://<your-username>.github.io/german-a1-study-plan/`.
 
 ## Repository structure
 
@@ -101,6 +117,14 @@ The Goethe-Institut estimates 60 to 150 hours of instruction for A1.
 - [ ] Add links to flashcards and cheat sheets from each week of the plan
 - [ ] Add a mock A1 exam for week 12
 
+## Author
+
+**Ons Ajmi**
+Cloud Infrastructure Management Engineering student at TEK-UP University, Tunisia.
+
+- GitHub: [AjmiOns](https://github.com/AjmiOns)
+- LinkedIn: [Ons Ajmi](https://www.linkedin.com/in/ons-ajmi--/)
+
 ## License
 
-Personal learning project. Add a license (for example MIT) if you want others to reuse it.
+Personal learning project.
